@@ -1,9 +1,9 @@
 from dataclasses import field
 from rest_framework.serializers import ModelSerializer
-from .models import Note
+from .models import Product
 
-class NoteSerializer(ModelSerializer):
+
+class ProductSerializer(ModelSerializer):
     class Meta:
-        model = Note
+        model = Product
         fields = '__all__'
-
