@@ -36,18 +36,3 @@ def getProduct(request, pk):
     products = Product.objects.get(id=pk)
     serializer = ProductSerializer(products, many=False)
     return Response(serializer.data)
-
-
-@api_view(['POST'])
-def createProduct(request):
-    product = ProductSerializer(data=request.data)
-
-    # validating for already existing data
-    if Product.objects.filter(**request.data).exists():
-        raise serializers.ValidationError('This data already exists')
-
-    if product.is_valid():
-        product.save()
-        return Response(product.data)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
