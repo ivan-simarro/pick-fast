@@ -13,7 +13,7 @@ export default function Products() {
             setTimeout(() => {
                 setProducts(res.data)
                 setLoading(false);
-            }, 2000);
+            }, 1000);
         })
     }, [])
 
@@ -21,7 +21,7 @@ export default function Products() {
     return (
         <ul className="products">
             {
-                !loading && products.map(product => <Product key={product.id} {...product} />)
+                !loading ? products.map(product => <Product key={product.id} {...product} />) : "Loading..."
             }
         </ul>
     )
