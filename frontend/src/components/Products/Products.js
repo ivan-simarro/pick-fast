@@ -21,7 +21,7 @@ export default function Products() {
     return (
         <ul className="products">
             {
-                !loading ? products.map(product => <Product key={product.id} {...product} />) : "Loading..."
+                !loading ? products.filter(p => p.type.includes("higiene")).map(product => <Product key={product.id} {...product} />) : "Loading..."
             }
         </ul>
     )
