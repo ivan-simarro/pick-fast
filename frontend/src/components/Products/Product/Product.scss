@@ -1,0 +1,23 @@
+.product {
+  width: 20rem;
+  height: 22rem;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  &__img {
+    max-width: 10rem;
+    max-height: 11rem;
+    margin: 0 auto;
+    &--nostock {
+      -webkit-filter: grayscale(1);
+      filter: gray;
+      filter: grayscale(1);
+    }
+  }
+
+  &__data {
+    margin-left: 2rem;
+  }
+}
