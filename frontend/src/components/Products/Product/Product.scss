@@ -49,6 +49,15 @@
       margin-top: 0.2rem;
       font-weight: 500;
       font-size: 1.4rem;
+      animation: appear 1.5s ease-in-out;
+    }
+
+    &--price {
+      height: 2rem;
+    }
+
+    &--title {
+      flex: auto;
     }
 
     &--add {
@@ -71,7 +80,9 @@
         text-align: center;
         font-size: 1.3rem;
         margin-bottom: 0.5rem;
+        animation: appear 1.5s ease-out;
       }
+
       &-btn {
         & > button {
           border: 0;
@@ -82,7 +93,7 @@
           color: white;
           &:hover {
             transition: all 0.3s linear;
-            background-color: #ff6e42;
+            background-color: #0088c7;
           }
         }
       }
@@ -93,5 +104,22 @@
 .disabled {
   & > button:hover {
     background-color: black;
+  }
+}
+
+.short {
+  height: 17.5rem;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    z-index: -1;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    z-index: 0;
+    transform: translateY(0);
   }
 }
