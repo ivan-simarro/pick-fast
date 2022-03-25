@@ -2,7 +2,8 @@ import "./Product.scss";
 import carrito from "../../../assets/carritotick.png";
 import { useEffect, useState } from "react";
 
-function Product({ name, image, description, price, brand, stock, type, quantity }) {
+function Product({ product }) {
+    const { name, image, description, price, brand, stock, type, quantity } = product;
     const [toCart, setToCart] = useState(1);
     const [isAdded, setIsAdded] = useState(false);
     const [show, setShow] = useState(sessionStorage.getItem("productAnimation") || false);
@@ -11,9 +12,10 @@ function Product({ name, image, description, price, brand, stock, type, quantity
         toCart <= 0 && setToCart(1);
     }, [toCart]);
 
-    function handleAddToCart(e, name) {
+    function handleAddToCart() {
         setIsAdded(true);
     }
+
     if (!show) {
         setTimeout(() => {
             setShow(true);

@@ -15,7 +15,7 @@ export default function Products() {
         <ul className="products">
             {
                 !loading
-                    ? products.map(product => <Product key={product.id} {...product} />)
+                    ? products.map(product => <Product key={product.id} product={product} />)
                     : <Spinner style={{ fontSize: "8rem", color: "white", position: "absolute", top: "0", bottom: "0", right: "0", left: "0", margin: "auto" }} />
             }
         </ul>
