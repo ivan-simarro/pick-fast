@@ -35,9 +35,11 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
                     <img className={location === "/cart" ? "cart__product__cart" : "product__cart "} src={carrito} alt="Added to cart" />
                 </Link>
             }
-            <img className={"product__cart--heart"} src={favourite ? fullHeart : emptyHeart} alt="Favourite" onClick={() => {
-                handleDeleteFromFavourites(id, !favourite);
-            }} />
+            {
+                location !== "/cart" && <img className={"product__cart--heart"} src={favourite ? fullHeart : emptyHeart} alt="Favourite" onClick={() => {
+                    handleDeleteFromFavourites(id, !favourite);
+                }} />
+            }
 
             <div className={location === "/cart" ? "cart__product__top" : "product__top"}>
                 <img className={stock ? location === "/cart" ? "product__img" : "cart__product__img" : "product__img cart__product__img product__img--nostock"} src={image} alt="" />
@@ -53,7 +55,7 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
                         <h1 className="cart__product__data--price">{brand}</h1>
                         <h1 className="cart__product__data--price">{type}</h1>
                         <h1 className="cart__product__data--price">{description}</h1>
-                        <h1 className="cart__product__data--total">Precio para {q} articulos: {q * price}€</h1>
+                        <h1 className="cart__product__data--total">Precio para {q} articulos: {(q * price).toFixed(2)}€</h1>
                     </>
                 }
                 <div className={location === "/cart" ? "cart__product__data--add" : "product__data--add "}>

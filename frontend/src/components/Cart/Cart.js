@@ -15,7 +15,7 @@ export default function Cart() {
 
     useEffect(() => {
         if (productsState.products.filter(p => p.inCart).length !== 0) {
-            const total = productsState.products.filter(p => p.inCart).map(p => p.q * p.price).reduce((previousValue, currentValue) => previousValue + currentValue);
+            const total = productsState.products.filter(p => p.inCart).map(p => p.q * p.price).reduce((previousValue, currentValue) => previousValue + currentValue).toFixed(2);
             setBill(total);
         }
     });
@@ -35,7 +35,7 @@ export default function Cart() {
                         {
                             productsState.products.filter(p => p.inCart).map(p => {
                                 return <li key={p.id} className="cart__bill--li">
-                                    <p>{p.name} x {p.q}: {p.q * p.price}€</p>
+                                    <p>{p.name} x {p.q}: {(p.q * p.price).toFixed(2)}€</p>
                                 </li>
                             })
                         }
