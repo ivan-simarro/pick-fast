@@ -1,5 +1,5 @@
 import "./Navbar.scss";
-import { FaHeart, FaHome, FaSearch, FaShoppingCart, FaUserAlt } from "react-icons/fa";
+import { FaHeart, FaHome, FaShoppingCart, FaUserAlt } from "react-icons/fa";
 import { BsChatSquareDotsFill } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
 
@@ -11,11 +11,6 @@ export default function Navbar() {
             <li>
                 <Link className={location.pathname === "/" ? 'navbar__item selected' : 'navbar__item'} to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth", })} >
                     <FaHome style={{ fontSize: "1.7rem" }} />
-                </Link>
-            </li>
-            <li>
-                <Link className={location.pathname === "/search" ? 'navbar__item selected' : 'navbar__item'} to="/search" onClick={() => window.scrollTo({ top: 0, behavior: "smooth", })} >
-                    <FaSearch style={{ fontSize: "1.7rem" }} />
                 </Link>
             </li>
             <li>

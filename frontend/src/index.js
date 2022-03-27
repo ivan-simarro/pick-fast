@@ -8,7 +8,6 @@ import {
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import Products from './components/Products/Products';
-import Search from './components/Search/Search';
 import Cart from './components/Cart/Cart';
 import Favourites from './components/Favourites/Favorites';
 import Profile from './components/Profile/Profile';
@@ -20,13 +19,14 @@ ReactDOM.render(
             <Route path="/" element={<App />}>
                 <Route path="" element={<Products />} >
                     <Route path="chocolate" element={<></>} />
+                    <Route path="chuches" element={<></>} />
                     <Route path="helados" element={<></>} />
                     <Route path="bebida" element={<></>} />
                     <Route path="despensa" element={<></>} />
                     <Route path="snacks" element={<></>} />
                     <Route path="higiene" element={<></>} />
+                    <Route path="alcohol" element={<></>} />
                 </Route>
-                <Route path="search" element={<Search />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="favourites" element={<Favourites />} />
                 <Route path="profile" element={<Profile />} />

@@ -21,6 +21,9 @@ export default function Products() {
         case "/chocolate":
             type = "chocolate"
             break;
+        case "/chuches":
+            type = "chuches"
+            break;
         case "/helados":
             type = "helados"
             break;
@@ -36,6 +39,9 @@ export default function Products() {
         case "/higiene":
             type = "higiene"
             break;
+        case "/alcohol":
+            type = "alcohol"
+            break;
         default:
             break;
     }
@@ -46,7 +52,7 @@ export default function Products() {
             location !== "/" ? < ul className="products">
                 {
                     !productsState.loading
-                        ? productsState.products.filter(p => p.type == type || p.type.includes(type)).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />)
+                        ? productsState.products.filter(p => p.type === type || p.type.includes(type)).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />)
                         : <Spinner style={{ fontSize: "8rem", color: "white", position: "absolute", top: "0", bottom: "0", right: "0", left: "0", margin: "auto" }} />
                 }
             </ul> : <Home />

@@ -9,6 +9,11 @@ export default function Favourites() {
     return (
         <ul className="products">
             {
+                productsState.products.filter(p => p.favourite).length === 0 && <div className="products__none">
+                    <p>Todavía no tienes productos favoritos...</p>
+                </div>
+            }
+            {
                 productsState.products.filter(p => p.favourite).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />)
             }
         </ul>
