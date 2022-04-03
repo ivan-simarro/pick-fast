@@ -25,23 +25,22 @@ export default function Cart() {
         <div className="cart">
             <ul className="cart__ul">
                 {
-                    productsState.products.filter(p => p.inCart).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromCart={handleDeleteFromCart} />)
+                    productsState.products.filter(p => p.inCart).length === 0 ? <div className="products__none">
+                        <p>Todavía no tienes productos en el carrito...</p>
+                    </div> : productsState.products.filter(p => p.inCart).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromCart={handleDeleteFromCart} />)
                 }
             </ul>
             {
                 <div className="cart__bill">
-                    <hr />
-                    <ul>
-                        {
-                            productsState.products.filter(p => p.inCart).map(p => {
-                                return <li key={p.id} className="cart__bill--li">
-                                    <p>{p.name} x {p.q}: {(p.q * p.price).toFixed(2)}€</p>
-                                </li>
-                            })
-                        }
-                    </ul>
-                    <h1>Total: {productsState.products.filter(p => p.inCart).length === 0 ? "0" : bill}€</h1>
 
+                    {
+                        productsState.products.filter(p => p.inCart).length > 0 && <><hr /><ul>{productsState.products.filter(p => p.inCart).map(p => {
+                            return <li key={p.id} className="cart__bill--li">
+                                <p>{p.name} x {p.q}: {(p.q * p.price).toFixed(2)}€</p>
+                            </li>
+                        })
+                        }</ul><h1>Total: {productsState.products.filter(p => p.inCart).length === 0 ? "0" : bill}€</h1></>
+                    }
                 </div>
             }
         </ div>
