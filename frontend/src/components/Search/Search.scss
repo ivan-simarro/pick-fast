@@ -1,0 +1,9 @@
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__input {
+    outline: none;
+  }
+}

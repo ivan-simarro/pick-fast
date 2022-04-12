@@ -1,7 +1,10 @@
 import "./Search.scss";
 
-export default function Search() {
+export default function Search({ setSearchTerm, searchTerm }) {
+
     return (
-        <input type="text" name="searchTerm" />
+        <div className="search">
+            <input className="search__input" placeholder="Search..." type="text" name="searchTerm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        </div>
     )
 }

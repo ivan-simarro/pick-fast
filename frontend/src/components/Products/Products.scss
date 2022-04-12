@@ -1,7 +1,11 @@
 .products {
+  position: absolute;
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  width: 85%;
-  gap: 16px;
+  width: 100%;
+  gap: 80px;
+  padding-bottom: 5rem;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,17 +1,24 @@
 .home {
+  position: absolute;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 80px;
-  margin-left: 5%;
+  gap: 100px;
+  padding-bottom: 5rem;
 
   & > * {
     text-decoration: none;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2.5rem 4rem rgba(black, 0.5);
   }
 
   &__product {
     width: 20rem;
     border-radius: 5%;
     background-color: white;
+    list-style: none;
 
     &--img {
       margin: 1rem;
@@ -20,13 +27,40 @@
     &--text {
       height: 5rem;
       color: black;
-      font-size: 2rem;
       padding-top: 1rem;
+      width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 2rem;
+      margin: 0 auto;
+      font-family: "Courier New";
+      border-right: 0.2rem solid #000000;
+      animation: typing 3s steps(38) 0.5s 1 normal both,
+        blink 0.5s steps(1) infinite;
 
       &-p {
         text-align: center;
         text-transform: uppercase;
       }
     }
+  }
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 60%;
+    border-color: transparent;
+  }
+  100% {
+    width: 100%;
+    border-color: transparent;
+  }
+}
+@keyframes blink {
+  50% {
+    border-color: transparent;
   }
 }

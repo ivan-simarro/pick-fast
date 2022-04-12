@@ -1,13 +1,15 @@
-import { useEffect, useReducer } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { Outlet } from 'react-router-dom';
 import { TYPES, initialProductsState, productsReducer, ENDPOINT_PRODUCTS } from "../reducers/productsReducer";
-import Navbar from './Navbar/Navbar';
 import axios from 'axios';
 import './App.scss';
+import Header from './Header/Header';
+import UpButton from './UpButton/UpButton';
 
 export default function App() {
 
     const [productsState, dispatchProducts] = useReducer(productsReducer, initialProductsState);
+    const [searchTerm, setSearchTerm] = useState(sessionStorage.getItem("searchTerm") || "");
 
     useEffect(() => {
         dispatchProducts({ type: TYPES.PRODUCTS_FETCH_INIT });
@@ -15,12 +17,16 @@ export default function App() {
             .then(res => {
                 setTimeout(() => {
                     dispatchProducts({ type: TYPES.PRODUCTS_FETCH_SUCCESS, payload: res.data });
-                }, 1000);
+                }, 1500);
             })
             .catch(err => {
                 dispatchProducts({ type: TYPES.PRODUCTS_FETCH_FAILURE })
             })
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        sessionStorage.setItem("searchTerm", searchTerm);
+    }, [searchTerm]);
 
 
     function handleToCart(id, q) {
@@ -32,9 +38,12 @@ export default function App() {
     }
 
     return (
-        <div className="app">
-            <Navbar />
-            <Outlet context={[productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites]} />
-        </div>
+        <>
+            <Header />
+            <div className="app">
+                <Outlet context={[productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm]} />
+                <UpButton />
+            </div>
+        </>
     )
 }
