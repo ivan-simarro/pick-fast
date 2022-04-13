@@ -27,7 +27,7 @@ export default function Products() {
 
     useEffect(() => {
         toShow !== 10 && setToShow(10);
-    }, [searchTerm]);
+    }, [searchTerm, products]);
 
     function paginating() {
         setIsPaginating(true);
@@ -76,9 +76,9 @@ export default function Products() {
                             return location === "/cart" ?
                                 <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />
                                 : i < toShow && < Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />
-                        })}{
-                                location !== "/cart" && !isPaginating ? products.filter(p => filtering(p, type, searchTerm)).length >= toShow && <button className="paginado" onClick={paginating}>Show more...</button> : <Spinner style={{ fontSize: "5rem", color: "black" }} />
-                            }</ul></>
+                        })}</ul>{
+                                location !== "/cart" && !isPaginating ? products.filter(p => filtering(p, type, searchTerm)).length >= toShow && <button className="paginado" onClick={paginating}>Show more...</button> : <Spinner style={{ fontSize: "5rem", color: "black", position: "absolute", bottom: "0", right: "0", left: "0", margin: "auto", marginBottom: "9.5rem" }} />
+                            }</>
                         : <Spinner style={{ fontSize: "5rem", color: "black", position: "absolute", top: "0", bottom: "0", right: "0", left: "0", margin: "auto", marginTop: "9rem" }} />
                 }
             </> : <Home />

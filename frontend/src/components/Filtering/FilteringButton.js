@@ -7,6 +7,6 @@ export default function FilteringButton({ setSelected, selected, setProducts, te
         setIsReverse(!isReverse);
         setSelected(text);
     }}><button>
-            {text}
+            <p style={{ cursor: "pointer" }} >{text}</p>
         </button><RiArrowUpDownLine /></div >
 }

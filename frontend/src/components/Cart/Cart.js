@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 
 export default function Cart() {
-    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm] = useOutletContext();
     const [bill, setBill] = useState(0);
 
     function handleDeleteFromCart(id) {

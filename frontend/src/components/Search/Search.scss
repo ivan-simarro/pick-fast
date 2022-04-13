@@ -1,9 +1,10 @@
 .search {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   width: 80rem;
   font-size: 1.5rem;
+  margin-right: 5rem;
 
   &__input {
     margin-left: 3rem;
