@@ -4,15 +4,13 @@ import { BsChatSquareDotsFill } from "react-icons/bs";
 import carritoLogo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import pages from '../Products/Home/homeAssets';
+import React from 'react';
+import Logo from '../Logo/Logo';
 
 export default function Header() {
     return (
         <header className="header">
-            <div className="header__title">
-                <p className="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
-                <p className="title" spellCheck="false"><span>PICK </span><span>FAST</span></p>
-            </div >
-
+            <Logo />
             <ul className="header__options">
                 <li className="header__options--home">
                     <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth", })} >
@@ -21,9 +19,9 @@ export default function Header() {
                     <ul className="header__options--home-list">
                         {
                             pages.map(page => {
-                                return <><li><Link to={"/" + page.name} onClick={() => window.scrollTo({ top: 0, behavior: "smooth", })}>
+                                return <React.Fragment key={page.id}><li><Link to={"/" + page.name} onClick={() => window.scrollTo({ top: 0, behavior: "smooth", })}>
                                     {page.name}
-                                </Link></li><hr /></>
+                                </Link></li><hr /></React.Fragment>
                             })
                         }
                     </ul>

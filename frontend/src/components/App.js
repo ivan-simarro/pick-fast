@@ -5,6 +5,7 @@ import axios from 'axios';
 import './App.scss';
 import Header from './Header/Header';
 import UpButton from './UpButton/UpButton';
+import Footer from './Footer/Footer';
 
 export default function App() {
 
@@ -38,12 +39,11 @@ export default function App() {
     }
 
     return (
-        <>
+        <div className="app">
             <Header />
-            <div className="app">
-                <Outlet context={[productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm]} />
-                <UpButton />
-            </div>
-        </>
+            <Outlet context={[productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm]} />
+            <UpButton />
+            <Footer />
+        </div>
     )
 }
