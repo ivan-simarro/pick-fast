@@ -13,6 +13,9 @@ export default function Products() {
 
     const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm] = useOutletContext();
     const [products, setProducts] = useState([]);
+    const [toShow, setToShow] = useState(10);
+    const [isPaginating, setIsPaginating] = useState(false);
+    const location = useLocation().pathname;
 
     useEffect(() => {
         if (productsState.products.length === 0) {
@@ -22,7 +25,17 @@ export default function Products() {
         }
     }, [productsState.products]);
 
-    const location = useLocation().pathname;
+    useEffect(() => {
+        toShow !== 10 && setToShow(10);
+    }, [searchTerm]);
+
+    function paginating() {
+        setIsPaginating(true);
+        setTimeout(() => {
+            setToShow(toShow => toShow + 5);
+            setIsPaginating(false);
+        }, 1500);
+    }
 
     var type;
     switch (location) {
@@ -59,8 +72,14 @@ export default function Products() {
             location !== "/" ? <>
                 {
                     !productsState.loading
-                        ? <><Filtering productsState={productsState.products} setProducts={setProducts} setSearchTerm={setSearchTerm} searchTerm={searchTerm} /> <ul className="products"> {products.filter(p => filtering(p, type, searchTerm)).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />)}</ul></>
-                        : <Spinner style={{ fontSize: "8rem", color: "black", position: "absolute", top: "0", bottom: "0", right: "0", left: "0", margin: "auto", marginTop: "5rem" }} />
+                        ? <><Filtering productsState={productsState.products} setProducts={setProducts} setSearchTerm={setSearchTerm} searchTerm={searchTerm} /> <ul className="products"> {products.filter(p => filtering(p, type, searchTerm)).map((product, i) => {
+                            return location === "/cart" ?
+                                <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />
+                                : i < toShow && < Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />
+                        })}{
+                                location !== "/cart" && !isPaginating ? products.filter(p => filtering(p, type, searchTerm)).length >= toShow && <button className="paginado" onClick={paginating}>Show more...</button> : <Spinner style={{ fontSize: "5rem", color: "black" }} />
+                            }</ul></>
+                        : <Spinner style={{ fontSize: "5rem", color: "black", position: "absolute", top: "0", bottom: "0", right: "0", left: "0", margin: "auto", marginTop: "9rem" }} />
                 }
             </> : <Home />
         }</>

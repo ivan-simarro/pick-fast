@@ -9,7 +9,6 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
     const { id, name, image, description, price, brand, stock, type, quantity, inCart, q, favourite } = product;
     const [toCart, setToCart] = useState(q > 0 ? q : 1);
     const [show, setShow] = useState(sessionStorage.getItem("productAnimation") || false);
-
     const location = useLocation().pathname;
 
     useEffect(() => {
@@ -17,12 +16,14 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
         toCart > 100 && setToCart(100);
     }, [toCart]);
 
-    if (!show) {
-        setTimeout(() => {
-            setShow(true);
-            sessionStorage.setItem("productAnimation", true);
-        }, 1500);
-    }
+    useEffect(() => {
+        if (!show) {
+            setTimeout(() => {
+                setShow(true);
+                sessionStorage.setItem("productAnimation", true);
+            }, 1000);
+        }
+    }, []);
 
     return (
         <li className={location === "/cart" ? "cart__product" : !show ? "product short" : "product"}>

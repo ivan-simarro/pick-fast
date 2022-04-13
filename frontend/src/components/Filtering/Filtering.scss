@@ -1,0 +1,48 @@
+.filteringBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  padding: 1rem;
+  margin-bottom: 3rem;
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & > div {
+      width: 8rem;
+      display: flex;
+      justify-content: space-around;
+      transition: all 0.5s ease-in;
+      align-items: center;
+
+      &:hover {
+        transform: scale(1.2);
+
+        & > svg {
+          transition: all 0.5s ease-in;
+          transform: rotate(180deg);
+        }
+      }
+
+      & > * {
+        font-size: 1.2rem;
+        background-color: transparent;
+        border: transparent;
+      }
+    }
+  }
+}
+
+.orderSelected {
+  transform: scale(1.4);
+  border-left: 1px solid rgb(0, 255, 21);
+  border-right: 1px solid rgb(0, 255, 21);
+}
