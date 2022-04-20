@@ -34,15 +34,17 @@ export default function Cart() {
                 <div className="cart__bill">
 
                     {
-                        productsState.products.filter(p => p.inCart).length > 0 && <><hr /><ul>{productsState.products.filter(p => p.inCart).map(p => {
-                            return <li key={p.id} className="cart__bill--li">
-                                <p>{p.name} x {p.q}: {(p.q * p.price).toFixed(2)}€</p>
-                            </li>
-                        })
-                        }</ul><h1>Total: {productsState.products.filter(p => p.inCart).length === 0 ? "0" : bill}€</h1></>
+                        productsState.products.filter(p => p.inCart).length > 0 && <><hr /><div className="cart__total" ><p>Total: <b>{productsState.products.filter(p => p.inCart).length === 0 ? "0" : bill}€</b></p><button className="cart__total--btn">Tramitar pedido</button></div></>
                     }
                 </div>
             }
         </ div>
     )
 }
+
+{/* <ul>{productsState.products.filter(p => p.inCart).map(p => {
+    return <li key={p.id} className="cart__bill--li">
+        <p>{p.name} x {p.q}: {(p.q * p.price).toFixed(2)}€</p>
+    </li>
+})
+}</ul> */}
