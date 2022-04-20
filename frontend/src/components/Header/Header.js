@@ -22,6 +22,7 @@ export default function Header() {
                     }} >
                         <FaHome className={selected == 1 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
+                    {selected == 1 && <p className='header__options--title'>Home</p>}
                     <ul className="header__options--home-list">
                         {
                             pages.map(page => {
@@ -42,6 +43,7 @@ export default function Header() {
                     }} >
                         <FaShoppingCart className={selected == 2 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
+                    {selected == 2 && <p className='header__options--title'>Cart</p>}
                 </li >
                 <li>
                     <Link to="/favourites" onClick={() => {
@@ -52,6 +54,7 @@ export default function Header() {
                     }} >
                         <FaHeart className={selected == 3 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
+                    {selected == 3 && <p className='header__options--title'>Favourites</p>}
                 </li >
                 <li>
                     <Link to="/profile" onClick={() => {
@@ -62,6 +65,7 @@ export default function Header() {
                     }} >
                         <FaUserAlt className={selected == 4 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
+                    {selected == 4 && <p className='header__options--title'>Profile</p>}
                 </li >
                 <li>
                     <Link to="/contact" onClick={() => {
@@ -72,6 +76,7 @@ export default function Header() {
                     }} >
                         <BsChatSquareDotsFill className={selected == 5 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
+                    {selected == 5 && <p className='header__options--title'>Contact</p>}
                 </li >
             </ul >
             <div className="header__img">
