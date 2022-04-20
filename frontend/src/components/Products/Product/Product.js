@@ -47,16 +47,16 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
             </div>
             <div className={location === "/cart" ? "cart__product__data" : "product__data"}>
                 {show && <>
-                    <h1 className={location === "/cart" ? "cart__product__data--price" : "product__data--price"}>{`${price} €`}</h1>
-                    <h2 className={location === "/cart" ? "cart__product__data--title" : "product__data--title"}>{name + " " + quantity}</h2>
+                    <h1 className={location === "/cart" ? "cart__product__data--price" : "product__data--price"}>{location === "/cart" && <b>Precio: </b>}{`${price} €`}</h1>
+                    <h2 className={location === "/cart" ? "cart__product__data--title" : "product__data--title"}>{location === "/cart" && <b>Producto: </b>}{name + " " + quantity}</h2>
                 </>
                 }
                 {
                     location === "/cart" && inCart && <>
-                        <h1 className="cart__product__data--price">{brand}</h1>
-                        <h1 className="cart__product__data--price">{type}</h1>
-                        <h1 className="cart__product__data--price">{description}</h1>
-                        <h1 className="cart__product__data--total">Precio para {q} articulos: {(q * price).toFixed(2)}€</h1>
+                        <h1 className="cart__product__data--price"><b>Marca: </b>{brand}</h1>
+                        <h1 className="cart__product__data--price"><b>Tipo de producto: </b>{type}</h1>
+                        <h1 className="cart__product__data--price"><b>Descripción: </b>{description}</h1>
+                        <h1 className="cart__product__data--add total">Precio para {q} articulos: {(q * price).toFixed(2)}€</h1>
                     </>
                 }
                 <div className={location === "/cart" ? "cart__product__data--add" : "product__data--add "}>

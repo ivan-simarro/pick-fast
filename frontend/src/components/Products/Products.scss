@@ -12,7 +12,10 @@
 .paginado {
   background-color: transparent;
   border: none;
-  font-size: 2.5rem;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  width: 15rem;
+  font-size: 2.2rem;
   cursor: pointer;
   color: black;
   position: absolute;
@@ -21,4 +24,8 @@
   left: 0;
   margin: auto;
   margin-bottom: 9.5rem;
+  &:hover {
+    transition: all 0.75s ease;
+    transform: scale(1.2);
+  }
 }

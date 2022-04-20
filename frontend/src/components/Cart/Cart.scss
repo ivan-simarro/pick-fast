@@ -7,6 +7,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     list-style: none;
+    gap: 30px;
   }
 
   &__bill {
@@ -19,11 +20,11 @@
 
   &__product {
     background-color: rgba(255, 255, 255, 0.493);
-    border: 1px solid black;
     width: 100%;
     height: 18rem;
     display: flex;
     position: relative;
+    border-bottom: 1px solid black;
 
     &__cart {
       display: none;
@@ -40,6 +41,9 @@
     }
 
     &__data {
+      height: 14rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
       flex: auto;
       background-color: white;
       padding: 1rem;
@@ -50,12 +54,8 @@
         margin-left: 1rem;
         margin-top: 0.2rem;
         font-weight: 500;
-        font-size: 1rem;
+        font-size: 1.3rem;
         animation: appear 1.5s ease-in-out;
-      }
-
-      &--price {
-        height: 2rem;
       }
 
       &--title {
@@ -112,4 +112,10 @@
       }
     }
   }
+}
+
+.total {
+  margin-left: 40rem;
+  font-size: 1.5rem;
+  bottom: 20px;
 }
