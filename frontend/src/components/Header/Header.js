@@ -2,14 +2,20 @@ import './Header.scss';
 import { FaHeart, FaHome, FaShoppingCart, FaUserAlt } from "react-icons/fa";
 import { BsChatSquareDotsFill } from "react-icons/bs";
 import carritoLogo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import pages from '../Products/Home/homeAssets';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../Logo/Logo';
 
 export default function Header() {
 
-    const [selected, setSelected] = useState(0);
+    const location = useLocation().pathname;
+
+    const [selected, setSelected] = useState(1);
+
+    useEffect(() => {
+        location === "/cart" && setSelected(2);
+    }, [location]);
 
     return (
         <header className="header">
@@ -81,6 +87,9 @@ export default function Header() {
             </ul >
             <div className="header__img">
                 <img src={carritoLogo} alt="" />
+            </div>
+            <div className="header__toPay">
+                <FaShoppingCart style={{ fontSize: "2rem" }} />
             </div>
         </header >
     )
