@@ -7,7 +7,7 @@ import pages from '../Products/Home/homeAssets';
 import React, { useEffect, useState } from 'react';
 import Logo from '../Logo/Logo';
 
-export default function Header() {
+export default function Header({ totalProducts, bill }) {
 
     const location = useLocation().pathname;
 
@@ -85,11 +85,19 @@ export default function Header() {
                     {selected == 5 && <p className='header__options--title'>Contact</p>}
                 </li >
             </ul >
-            <div className="header__img">
-                <img src={carritoLogo} alt="" />
-            </div>
             <div className="header__toPay">
-                <FaShoppingCart style={{ fontSize: "2rem" }} />
+                <Link to="/cart" onClick={() => {
+                    window.scrollTo({
+                        top: 0, behavior: "smooth",
+                    })
+                    setSelected(2);
+                }} >
+                    <img className='header__img' src={carritoLogo} alt="" />
+                </Link>
+                <div id='header-cart' className="header__toPay--circle">
+                    <p>{totalProducts}</p>
+                </div>
+                <p className='header__toPay--bill'>{bill}€</p>
             </div>
         </header >
     )

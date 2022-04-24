@@ -2,24 +2,19 @@ import "./Cart.scss";
 import { useOutletContext } from "react-router-dom";
 import Product from "../Products/Product/Product";
 import { TYPES } from "../../reducers/productsReducer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 export default function Cart() {
-    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm] = useOutletContext();
-    const [bill, setBill] = useState(0);
+    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
 
     function handleDeleteFromCart(id) {
         dispatchProducts({ type: TYPES.DELETE_PRODUCT_FROM_CART, payload: { id } })
     }
 
-    useEffect(() => {
-        if (productsState.products.filter(p => p.inCart).length !== 0) {
-            const total = productsState.products.filter(p => p.inCart).map(p => p.q * p.price).reduce((previousValue, currentValue) => previousValue + currentValue).toFixed(2);
-            setBill(total);
-        }
-    });
-
+    if (productsState.products.filter(p => p.inCart).length === 0) {
+        setBill(0);
+    }
 
     return (
         <div className="cart">
@@ -41,10 +36,3 @@ export default function Cart() {
         </ div>
     )
 }
-
-{/* <ul>{productsState.products.filter(p => p.inCart).map(p => {
-    return <li key={p.id} className="cart__bill--li">
-        <p>{p.name} x {p.q}: {(p.q * p.price).toFixed(2)}€</p>
-    </li>
-})
-}</ul> */}

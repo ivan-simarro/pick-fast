@@ -11,7 +11,7 @@ import { sortProducts } from "../Filtering/sortProducts";
 
 export default function Products() {
 
-    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
     const [products, setProducts] = useState([]);
     const [toShow, setToShow] = useState(10);
     const [isPaginating, setIsPaginating] = useState(false);

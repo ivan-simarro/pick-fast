@@ -11,6 +11,8 @@ export default function App() {
 
     const [productsState, dispatchProducts] = useReducer(productsReducer, initialProductsState);
     const [searchTerm, setSearchTerm] = useState(sessionStorage.getItem("searchTerm") || "");
+    const [totalProducts, setTotalProducts] = useState(0);
+    const [bill, setBill] = useState(0);
 
     useEffect(() => {
         dispatchProducts({ type: TYPES.PRODUCTS_FETCH_INIT });
@@ -30,9 +32,27 @@ export default function App() {
     }, [searchTerm]);
 
 
+    useEffect(() => {
+        if (productsState.products.filter(p => p.inCart).length !== 0) {
+            const total = productsState.products.filter(p => p.inCart).map(p => p.q * p.price).reduce((previousValue, currentValue) => previousValue + currentValue).toFixed(2);
+            setBill(total);
+        }
+    });
+
+
     function handleToCart(id, q) {
         dispatchProducts({ type: TYPES.ADD_TO_CART, payload: { id, q } });
     }
+
+    useEffect(() => {
+        let total = 0;
+        productsState.products.map(p => {
+            if (p.inCart) {
+                total += p.q;
+            }
+        })
+        setTotalProducts(total);
+    }, [bill]);
 
     function handleDeleteFromFavourites(id, favourite) {
         dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite } });
@@ -40,8 +60,8 @@ export default function App() {
 
     return (
         <div className="app">
-            <Header />
-            <Outlet context={[productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm]} />
+            <Header totalProducts={totalProducts} bill={bill} />
+            <Outlet context={[productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill]} />
             <UpButton />
             <Footer />
         </div>

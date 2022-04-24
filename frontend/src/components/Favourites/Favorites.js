@@ -5,7 +5,7 @@ import Search from "../Search/Search";
 
 
 export default function Favourites() {
-    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
 
     return (
         <>{productsState.products.filter(p => p.favourite).length !== 0 && <div style={{ marginBottom: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center" }} ><Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /></div>}<ul className="products">

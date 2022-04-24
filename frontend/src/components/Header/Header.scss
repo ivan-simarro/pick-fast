@@ -17,12 +17,12 @@ $header-color: rgb(255, 236, 198);
     width: 100%;
     text-align: center;
   }
-  &__img img {
-    width: 100px;
+  &__img {
+    width: 90px;
   }
 
   &__options {
-    flex: 1 0 45%;
+    flex: 1 0 55%;
     height: 100%;
     display: flex;
     list-style: none;
@@ -121,26 +121,32 @@ $header-color: rgb(255, 236, 198);
   }
 
   &__toPay {
-    width: 50rem;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    background-color: rgb(209, 195, 167);
     border-radius: 50px;
-    height: 3rem;
-    margin-right: 4rem;
     padding: 1rem;
+    cursor: pointer;
 
-    &::before {
-      content: "";
-      width: 1rem;
-      height: 1rem;
+    &--circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
       background-color: red;
       color: white;
+      font-weight: 900;
       border-radius: 50%;
       position: absolute;
-      margin-left: 1.5rem;
-      margin-top: -1.45rem;
+      margin-left: 0.5rem;
+      margin-top: -0.7rem;
+    }
+
+    &--bill {
+      width: 4rem;
+      font-size: 1.2rem;
+      margin-left: 2rem;
     }
   }
 }
@@ -156,10 +162,9 @@ $header-color: rgb(255, 236, 198);
       margin-right: 2rem;
       gap: 20px;
     }
-
-    &__img {
-      display: none;
-    }
+  }
+  .logo {
+    display: none;
   }
 }
 
