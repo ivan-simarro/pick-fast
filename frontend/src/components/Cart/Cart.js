@@ -2,14 +2,44 @@ import "./Cart.scss";
 import { useOutletContext } from "react-router-dom";
 import Product from "../Products/Product/Product";
 import { TYPES } from "../../reducers/productsReducer";
-import { useEffect } from "react";
+import Swal from 'sweetalert2';
 
+const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn-alert btn-success',
+        cancelButton: 'btn-alert btn-danger'
+    },
+    buttonsStyling: false
+})
 
 export default function Cart() {
     const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
 
     function handleDeleteFromCart(id) {
-        dispatchProducts({ type: TYPES.DELETE_PRODUCT_FROM_CART, payload: { id } })
+        swalWithBootstrapButtons.fire({
+            title: '¿Quieres eliminarlo del carrito?',
+            text: "El precio será descontado del total",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatchProducts({ type: TYPES.DELETE_PRODUCT_FROM_CART, payload: { id } });
+                swalWithBootstrapButtons.fire(
+                    '¡Eliminado!',
+                    'Borrado correctamente',
+                    'success'
+                )
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    '¡Sigue siendo todo tuyo!',
+                    'error'
+                )
+            }
+        })
     }
 
     if (productsState.products.filter(p => p.inCart).length === 0) {
