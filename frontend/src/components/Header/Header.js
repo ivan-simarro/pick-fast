@@ -37,7 +37,7 @@ export default function Header({ totalProducts, bill }) {
                                     setSelected(1);
                                 }}>
                                     {page.name}
-                                </Link></li><hr /></React.Fragment>
+                                </Link></li></React.Fragment>
                             })
                         }
                     </ul>

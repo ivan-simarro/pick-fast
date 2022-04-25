@@ -1,17 +1,16 @@
-$header-color: rgb(255, 236, 198);
-
 .header {
   height: 8rem;
   width: 100%;
   margin-bottom: 3rem;
   top: 0;
-  background-color: $header-color;
+  background-color: white;
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   position: sticky;
   z-index: 100;
+  border-bottom: 1px solid black;
 
   & > * {
     width: 100%;
@@ -46,7 +45,7 @@ $header-color: rgb(255, 236, 198);
         border-top: 0;
         list-style: none;
         position: absolute;
-        background-color: $header-color;
+        background-color: white;
         width: 100%;
         top: 0;
         left: 0;
@@ -54,10 +53,18 @@ $header-color: rgb(255, 236, 198);
         color: white;
         font-size: 1.5rem;
         display: none;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+
+        & > *:last-child:hover {
+          border-bottom-left-radius: 20px;
+          border-bottom-right-radius: 20px;
+        }
 
         & > li {
-          border-left: 2px solid black;
-          border-right: 2px solid black;
           height: 3rem;
           display: flex;
           justify-content: center;
@@ -65,10 +72,11 @@ $header-color: rgb(255, 236, 198);
 
           &:hover {
             background-color: rgb(83, 83, 83);
+
             border: none;
 
             & > * {
-              color: $header-color;
+              color: white;
             }
           }
           & > * {
@@ -152,7 +160,7 @@ $header-color: rgb(255, 236, 198);
 }
 
 .selected {
-  color: rgb(255, 80, 80);
+  color: rgb(26, 214, 214);
   transform: scale(1.3);
 }
 
