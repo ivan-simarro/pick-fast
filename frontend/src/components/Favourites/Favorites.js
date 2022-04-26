@@ -5,6 +5,7 @@ import Search from "../Search/Search";
 
 
 export default function Favourites() {
+    // eslint-disable-next-line
     const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
 
     return (
@@ -12,7 +13,7 @@ export default function Favourites() {
             {productsState.products.filter(p => p.favourite).length === 0 && <div className="products__none">
                 <p>Todavía no tienes productos favoritos...</p>
             </div>}
-            {productsState.products.filter(p => p.favourite == true && (p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase()) || p.brand.toLowerCase().includes(searchTerm.toLowerCase()))).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />)}
+            {productsState.products.filter(p => p.favourite === true && (p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase()) || p.brand.toLowerCase().includes(searchTerm.toLowerCase()))).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleDeleteFromFavourites={handleDeleteFromFavourites} />)}
         </ul></>
     )
 }

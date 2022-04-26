@@ -26,9 +26,9 @@ export default function Header({ totalProducts, bill }) {
                         window.scrollTo({ top: 0, behavior: "smooth", })
                         setSelected(1);
                     }} >
-                        <FaHome className={selected == 1 ? "header__options--item selected" : "header__options--item"} />
+                        <FaHome className={selected === 1 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
-                    {selected == 1 && <p className='header__options--title'>Home</p>}
+                    {selected === 1 && <p className='header__options--title'>Home</p>}
                     <ul className="header__options--home-list">
                         {
                             pages.map(page => {
@@ -47,9 +47,9 @@ export default function Header({ totalProducts, bill }) {
                         window.scrollTo({ top: 0, behavior: "smooth", })
                         setSelected(2);
                     }} >
-                        <FaShoppingCart className={selected == 2 ? "header__options--item selected" : "header__options--item"} />
+                        <FaShoppingCart className={selected === 2 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
-                    {selected == 2 && <p className='header__options--title'>Cart</p>}
+                    {selected === 2 && <p className='header__options--title'>Cart</p>}
                 </li >
                 <li>
                     <Link to="/favourites" onClick={() => {
@@ -58,9 +58,9 @@ export default function Header({ totalProducts, bill }) {
                         })
                         setSelected(3);
                     }} >
-                        <FaHeart className={selected == 3 ? "header__options--item selected" : "header__options--item"} />
+                        <FaHeart className={selected === 3 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
-                    {selected == 3 && <p className='header__options--title'>Favourites</p>}
+                    {selected === 3 && <p className='header__options--title'>Favourites</p>}
                 </li >
                 <li>
                     <Link to="/profile" onClick={() => {
@@ -69,9 +69,9 @@ export default function Header({ totalProducts, bill }) {
                         })
                         setSelected(4);
                     }} >
-                        <FaUserAlt className={selected == 4 ? "header__options--item selected" : "header__options--item"} />
+                        <FaUserAlt className={selected === 4 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
-                    {selected == 4 && <p className='header__options--title'>Profile</p>}
+                    {selected === 4 && <p className='header__options--title'>Profile</p>}
                 </li >
                 <li>
                     <Link to="/contact" onClick={() => {
@@ -80,9 +80,9 @@ export default function Header({ totalProducts, bill }) {
                         })
                         setSelected(5);
                     }} >
-                        <BsChatSquareDotsFill className={selected == 5 ? "header__options--item selected" : "header__options--item"} />
+                        <BsChatSquareDotsFill className={selected === 5 ? "header__options--item selected" : "header__options--item"} />
                     </Link>
-                    {selected == 5 && <p className='header__options--title'>Contact</p>}
+                    {selected === 5 && <p className='header__options--title'>Contact</p>}
                 </li >
             </ul >
             <div className="header__toPay">

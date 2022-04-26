@@ -47,7 +47,7 @@ const productsReducer = (state, action) => {
             return {
                 ...state,
                 products: state.products.map((p) => {
-                    if (p.id == action.payload.id) {
+                    if (p.id === action.payload.id) {
                         return p.inCart ? { ...p, q: action.payload.q } : { ...p, inCart: true, q: action.payload.q }
                     } else {
                         return p
@@ -58,7 +58,7 @@ const productsReducer = (state, action) => {
             return {
                 ...state,
                 products: state.products.map((p) => {
-                    if (p.id == action.payload.id) {
+                    if (p.id === action.payload.id) {
                         return { ...p, inCart: false, q: 0 }
                     } else {
                         return p
@@ -69,7 +69,7 @@ const productsReducer = (state, action) => {
             return {
                 ...state,
                 products: state.products.map((p) => {
-                    if (p.id == action.payload.id) {
+                    if (p.id === action.payload.id) {
                         return { ...p, favourite: action.payload.favourite }
                     } else {
                         return p

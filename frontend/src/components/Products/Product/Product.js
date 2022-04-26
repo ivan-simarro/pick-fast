@@ -24,6 +24,7 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
                 sessionStorage.setItem("productAnimation", true);
             }, 1000);
         }
+        // eslint-disable-next-line
     }, []);
 
     return (

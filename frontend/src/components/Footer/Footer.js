@@ -7,7 +7,7 @@ export default function Footer() {
                 © 2022
             </h2>
             <Logo />
-            <a href="" onClick={(e) => e.preventDefault()}>
+            <a href="http://localhost:3000" onClick={(e) => e.preventDefault()}>
                 Terms & conditions
             </a>
         </footer >

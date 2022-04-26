@@ -39,20 +39,20 @@ export default function App() {
         }
     });
 
-
     function handleToCart(id, q) {
         dispatchProducts({ type: TYPES.ADD_TO_CART, payload: { id, q } });
     }
 
     useEffect(() => {
         let total = 0;
+        // eslint-disable-next-line
         productsState.products.map(p => {
             if (p.inCart) {
                 total += p.q;
             }
         })
         setTotalProducts(total);
-    }, [bill]);
+    }, [bill, productsState.products]);
 
     function handleDeleteFromFavourites(id, favourite) {
         dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite } });

@@ -11,6 +11,7 @@ import { sortProducts } from "../Filtering/sortProducts";
 
 export default function Products() {
 
+    // eslint-disable-next-line
     const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
     const [products, setProducts] = useState([]);
     const [toShow, setToShow] = useState(10);
@@ -27,6 +28,7 @@ export default function Products() {
 
     useEffect(() => {
         toShow !== 10 && setToShow(10);
+        // eslint-disable-next-line
     }, [searchTerm, products]);
 
     function paginating() {
