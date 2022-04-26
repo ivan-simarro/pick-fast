@@ -1,5 +1,5 @@
 import "./Cart.scss";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import Product from "../Products/Product/Product";
 import { TYPES } from "../../reducers/productsReducer";
 import Swal from 'sweetalert2';
@@ -60,7 +60,13 @@ export default function Cart() {
                 <div className="cart__bill">
 
                     {
-                        productsState.products.filter(p => p.inCart).length > 0 && <><hr /><div className="cart__total" ><p>Total: <b>{productsState.products.filter(p => p.inCart).length === 0 ? "0" : bill}€</b></p><button className="cart__total--btn">Tramitar pedido</button></div></>
+                        productsState.products.filter(p => p.inCart).length > 0 && <><hr />
+                            <div className="cart__total" >
+                                <p>Total: <b>{productsState.products.filter(p => p.inCart).length === 0 ? "0" : bill}€</b></p>
+                                <Link to="/payment">
+                                    <button className="cart__total--btn">Tramitar pedido</button>
+                                </Link>
+                            </div></>
                     }
                 </div>
             }

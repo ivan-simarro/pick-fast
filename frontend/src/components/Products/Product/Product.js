@@ -27,6 +27,13 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
         // eslint-disable-next-line
     }, []);
 
+    useEffect(() => {
+
+        if (q === toCart) {
+            setIsAvailableToUpdate(false);
+        }
+    }, [q, toCart]);
+
     return (
         <li className={location === "/cart" ? "cart__product" : !show ? "product short" : "product"}>
             {
@@ -73,7 +80,7 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
                                     setIsAvailableToUpdate(true);
                                 }}>+</button></>}
                                 <div className={location === "/cart" ? "cart__product__data--add-btn" : "product__data--add-btn"}>
-                                    <button className={!isAvailableToUpdate && q !== 0 && "btn-disabled"} style={{ cursor: "pointer" }} onClick={() => {
+                                    <button className={!isAvailableToUpdate && q !== 0 ? "btn-disabled" : ""} style={{ cursor: "pointer" }} onClick={() => {
                                         setIsAvailableToUpdate(false);
                                         handleToCart(id, toCart);
                                     }}>{q !== 0 ? "Actualizar cantidad" : "Añadir al carrito"}</button>

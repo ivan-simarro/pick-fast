@@ -12,6 +12,7 @@ import Cart from './components/Cart/Cart';
 import Favourites from './components/Favourites/Favorites';
 import Profile from './components/Profile/Profile';
 import Contact from './components/Contact/Contact';
+import Payment from './components/Payment/Payment';
 
 
 ReactDOM.render(
@@ -29,6 +30,7 @@ ReactDOM.render(
                     <Route path="alcohol" element={<></>} />
                 </Route>
                 <Route path="cart" element={<Cart />} />
+                <Route path="payment" element={<Payment />} />
                 <Route path="favourites" element={<Favourites />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="contact" element={<Contact />} />
