@@ -10,6 +10,7 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
     const [toCart, setToCart] = useState(q > 0 ? q : 1);
     const [show, setShow] = useState(sessionStorage.getItem("productAnimation") || false);
     const location = useLocation().pathname;
+    const [isAvailableToUpdate, setIsAvailableToUpdate] = useState(false);
 
     useEffect(() => {
         toCart <= 0 && setToCart(1);
@@ -63,9 +64,18 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
                     {
                         stock ?
                             <>
-                                {show && <><button className={location === "/cart" ? "cart__product__data--add-number" : "product__data--add-number"} onClick={() => setToCart(toCart => toCart - 1)}>-</button><input type="number" className={location === "/cart" ? "cart__product__data--add-number" : "product__data--add-number"} size="3" value={toCart} min="1" pattern="^[0-9]+" max="100" onChange={(e) => setToCart(e.target.value)}></input><button className={location === "/cart" ? "cart__product__data--add-number" : "product__data--add-number"} onClick={() => setToCart(toCart => toCart + 1)}>+</button></>}
+                                {show && <><button className={location === "/cart" ? "cart__product__data--add-number" : "product__data--add-number"} onClick={() => {
+                                    setIsAvailableToUpdate(true);
+                                    setToCart(toCart => toCart - 1);
+                                }}>-</button><input type="number" className={location === "/cart" ? "cart__product__data--add-number" : "product__data--add-number"} size="3" value={toCart} min="1" pattern="^[0-9]+" max="100" onChange={(e) => setToCart(e.target.value)}></input><button className={location === "/cart" ? "cart__product__data--add-number" : "product__data--add-number"} onClick={() => {
+                                    setToCart(toCart => toCart + 1);
+                                    setIsAvailableToUpdate(true);
+                                }}>+</button></>}
                                 <div className={location === "/cart" ? "cart__product__data--add-btn" : "product__data--add-btn"}>
-                                    <button style={{ cursor: "pointer" }} onClick={() => handleToCart(id, toCart)}>{q !== 0 ? "Actualizar cantidad" : "Añadir al carrito"}</button>
+                                    <button className={!isAvailableToUpdate && q !== 0 && "btn-disabled"} style={{ cursor: "pointer" }} onClick={() => {
+                                        setIsAvailableToUpdate(false);
+                                        handleToCart(id, toCart);
+                                    }}>{q !== 0 ? "Actualizar cantidad" : "Añadir al carrito"}</button>
                                 </div>
                                 {inCart && location === "/cart" && <div className={location === "/cart" ? "cart__product__data--add-btn" : "product__data--add-btn"}>
                                     <button style={{ cursor: "pointer", backgroundColor: "red" }} onClick={() => handleDeleteFromCart(id)}>Eliminar articulo</button>
