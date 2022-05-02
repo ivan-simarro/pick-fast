@@ -4,6 +4,7 @@ import emptyHeart from "../../../assets/emptyHeart.png";
 import fullHeart from "../../../assets/fullHeart.png";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFromFavourites }) {
     const { id, name, image, description, price, brand, stock, type, quantity, inCart, q, favourite } = product;
@@ -34,6 +35,17 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
         }
     }, [q, toCart]);
 
+    function handleProductDetails() {
+        Swal.fire({
+            title: name + " " + quantity,
+            text: description,
+            imageUrl: image,
+            imageWidth: 300,
+            imageHeight: 300,
+            imageAlt: name,
+        })
+    }
+
     return (
         <li className={location === "/cart" ? "cart__product" : !show ? "product short" : "product"}>
             {
@@ -52,7 +64,7 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
             }
 
             <div className={location === "/cart" ? "cart__product__top" : "product__top"}>
-                <img className={stock ? location === "/cart" ? "product__img" : "cart__product__img" : "product__img cart__product__img product__img--nostock"} src={image} alt="" />
+                <img className={stock ? location === "/cart" ? "product__img" : "cart__product__img" : "product__img cart__product__img product__img--nostock"} src={image} alt="" onClick={handleProductDetails} />
             </div>
             <div className={location === "/cart" ? "cart__product__data" : "product__data"}>
                 {show && <>

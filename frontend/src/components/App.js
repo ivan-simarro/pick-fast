@@ -58,6 +58,12 @@ export default function App() {
         dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite } });
     }
 
+    useEffect(() => {
+        window.onbeforeunload = function (e) {
+            return "You have some unsaved changes";
+        };
+    }, []);
+
     return (
         <div className="app">
             <Header totalProducts={totalProducts} bill={bill} />
