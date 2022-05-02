@@ -6,6 +6,7 @@ const TYPES = {
     ADD_TO_CART: "ADD_TO_CART",
     DELETE_PRODUCT_FROM_CART: "DELETE_PRODUCT_FROM_CART",
     ADD_DELETE_TO_FAVOURITES: "ADD_DELETE_TO_FAVOURITES",
+    DELETE_CART: "DELETE_CART"
 }
 
 const initialProductsState = {
@@ -74,6 +75,13 @@ const productsReducer = (state, action) => {
                     } else {
                         return p
                     }
+                })
+            }
+        case "DELETE_CART":
+            return {
+                ...state,
+                products: state.products.map((p) => {
+                    return { ...p, inCart: false, q: 0 }
                 })
             }
         default:

@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 28rem;
+    width: 50rem;
     height: 2.5rem;
 
     &--btn {
@@ -149,4 +149,9 @@
   margin-left: 40rem;
   font-size: 1.5rem;
   bottom: 20px;
+}
+
+.empty {
+  background-color: red;
+  height: 1.6rem;
 }

@@ -43,6 +43,33 @@ export default function Cart() {
         })
     }
 
+    function handleDeleteCart() {
+        swalWithBootstrapButtons.fire({
+            title: '¿Quieres vaciar el carrito?',
+            text: "Perderá todos los artículos seleccionados",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatchProducts({ type: TYPES.DELETE_CART });
+                swalWithBootstrapButtons.fire(
+                    '¡Vaciado!',
+                    'Se han eliminado todos los productos de su carrito',
+                    'success'
+                )
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    '¡Sigue siendo todo tuyo!',
+                    'error'
+                )
+            }
+        })
+    }
+
     if (productsState.products.filter(p => p.inCart).length === 0) {
         setBill(0);
     }
@@ -62,6 +89,7 @@ export default function Cart() {
                     {
                         productsState.products.filter(p => p.inCart).length > 0 && <><hr />
                             <div className="cart__total" >
+                                <button className="cart__total--btn empty" onClick={handleDeleteCart}>Vaciar carrito</button>
                                 <p>Total: <b>{productsState.products.filter(p => p.inCart).length === 0 ? "0" : bill}€</b></p>
                                 <Link to="/payment">
                                     <button className="cart__total--btn">Tramitar pedido</button>
