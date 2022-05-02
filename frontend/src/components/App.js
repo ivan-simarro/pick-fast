@@ -13,6 +13,8 @@ export default function App() {
     const [searchTerm, setSearchTerm] = useState(sessionStorage.getItem("searchTerm") || "");
     const [totalProducts, setTotalProducts] = useState(0);
     const [bill, setBill] = useState(0);
+    const [isReverse, setIsReverse] = useState(false);
+    const [selected, setSelected] = useState('');
 
     useEffect(() => {
         dispatchProducts({ type: TYPES.PRODUCTS_FETCH_INIT });
@@ -67,7 +69,7 @@ export default function App() {
     return (
         <div className="app">
             <Header totalProducts={totalProducts} bill={bill} />
-            <Outlet context={[productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill]} />
+            <Outlet context={[productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected]} />
             <UpButton />
             <Footer />
         </div>

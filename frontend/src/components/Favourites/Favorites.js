@@ -6,14 +6,14 @@ import Search from "../Search/Search";
 
 export default function Favourites() {
     // eslint-disable-next-line
-    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected] = useOutletContext();
 
     return (
         <>{productsState.products.filter(p => p.favourite).length !== 0 && <div style={{ marginBottom: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center" }} ><Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /></div>}<ul className="products">
             {productsState.products.filter(p => p.favourite).length === 0 && <div className="products__none">
                 <p>Todavía no tienes productos favoritos...</p>
             </div>}
-            {productsState.products.filter(p => p.favourite === true && (p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase()) || p.brand.toLowerCase().includes(searchTerm.toLowerCase()))).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleAddDeleteFromFavourites={handleAddDeleteFromFavourites} />)}
+            {productsState.products.filter(p => p.favourite === true && (p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase()) || p.brand.toLowerCase().includes(searchTerm.toLowerCase()))).map(product => <Product key={product.id} product={product} handleToCart={handleToCart} handleAddDeleteFromFavourites={handleAddDeleteFromFavourites} setIsReverse={setIsReverse} setSelected={setSelected} />)}
         </ul></>
     )
 }

@@ -12,13 +12,11 @@ import { sortProducts } from "../Filtering/sortProducts";
 export default function Products() {
 
     // eslint-disable-next-line
-    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected] = useOutletContext();
     const [products, setProducts] = useState([]);
     const [toShow, setToShow] = useState(10);
     const [isPaginating, setIsPaginating] = useState(false);
     const location = useLocation().pathname;
-    const [isReverse, setIsReverse] = useState(false);
-    const [selected, setSelected] = useState('');
 
     useEffect(() => {
         if (productsState.products.length === 0) {
