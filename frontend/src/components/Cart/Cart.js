@@ -3,6 +3,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import Product from "../Products/Product/Product";
 import { TYPES } from "../../reducers/productsReducer";
 import Swal from 'sweetalert2';
+import { useEffect } from "react";
 
 const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -14,7 +15,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 export default function Cart() {
     // eslint-disable-next-line
-    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
 
     function handleDeleteFromCart(id) {
         swalWithBootstrapButtons.fire({
@@ -70,9 +71,11 @@ export default function Cart() {
         })
     }
 
-    if (productsState.products.filter(p => p.inCart).length === 0) {
-        setBill(0);
-    }
+    useEffect(() => {
+        if (productsState.products.filter(p => p.inCart).length === 0) {
+            setBill(0);
+        }
+    });
 
     return (
         <div className="cart">

@@ -17,7 +17,7 @@ function paymentAlert() {
 }
 export default function Payment() {
     // eslint-disable-next-line
-    const [productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill] = useOutletContext();
 
     useEffect(() => {
         paymentAlert();

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Swal from 'sweetalert2';
 
-function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFromFavourites }) {
+function Product({ product, handleToCart, handleDeleteFromCart, handleAddDeleteFromFavourites, setSelected, setIsReverse }) {
     const { id, name, image, description, price, brand, stock, type, quantity, inCart, q, favourite } = product;
     const [toCart, setToCart] = useState(q > 0 ? q : 1);
     const [show, setShow] = useState(sessionStorage.getItem("productAnimation") || false);
@@ -59,7 +59,9 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
             }
             {
                 location !== "/cart" && <img className={"product__cart--heart"} src={favourite ? fullHeart : emptyHeart} alt="Favourite" onClick={() => {
-                    handleDeleteFromFavourites(id, !favourite);
+                    handleAddDeleteFromFavourites(id, !favourite);
+                    setSelected("Favoritos");
+                    setIsReverse(false);
                 }} />
             }
 
@@ -95,6 +97,8 @@ function Product({ product, handleToCart, handleDeleteFromCart, handleDeleteFrom
                                     <button className={!isAvailableToUpdate && q !== 0 ? "btn-disabled" : ""} style={{ cursor: "pointer" }} onClick={() => {
                                         setIsAvailableToUpdate(false);
                                         handleToCart(id, toCart);
+                                        setSelected("En carrito");
+                                        setIsReverse(false);
                                     }}>{q !== 0 ? "Actualizar cantidad" : "Añadir al carrito"}</button>
                                 </div>
                                 {inCart && location === "/cart" && <div className={location === "/cart" ? "cart__product__data--add-btn" : "product__data--add-btn"}>

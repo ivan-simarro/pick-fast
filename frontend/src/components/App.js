@@ -37,7 +37,7 @@ export default function App() {
             const total = productsState.products.filter(p => p.inCart).map(p => p.q * p.price).reduce((previousValue, currentValue) => previousValue + currentValue).toFixed(2);
             setBill(total);
         }
-    });
+    }, [productsState.products]);
 
     function handleToCart(id, q) {
         dispatchProducts({ type: TYPES.ADD_TO_CART, payload: { id, q } });
@@ -54,20 +54,20 @@ export default function App() {
         setTotalProducts(total);
     }, [bill, productsState.products]);
 
-    function handleDeleteFromFavourites(id, favourite) {
+    function handleAddDeleteFromFavourites(id, favourite) {
         dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite } });
     }
 
     useEffect(() => {
         window.onbeforeunload = function (e) {
-            return "You have some unsaved changes";
+            return "Perderás los productos de tu carrito";
         };
     }, []);
 
     return (
         <div className="app">
             <Header totalProducts={totalProducts} bill={bill} />
-            <Outlet context={[productsState, dispatchProducts, handleToCart, handleDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill]} />
+            <Outlet context={[productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill]} />
             <UpButton />
             <Footer />
         </div>

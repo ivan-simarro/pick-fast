@@ -1,12 +1,8 @@
 import "./Filtering.scss";
-import { useState } from "react";
 import Search from "../Search/Search";
 import FilteringButton from "./FilteringButton";
 
-export default function Filtering({ productsState, setProducts, setSearchTerm, searchTerm }) {
-
-    const [isReverse, setIsReverse] = useState(false);
-    const [selected, setSelected] = useState('');
+export default function Filtering({ productsState, setProducts, setSearchTerm, searchTerm, isReverse, selected, setSelected, setIsReverse }) {
 
     return (
         <div className="filteringBar">
