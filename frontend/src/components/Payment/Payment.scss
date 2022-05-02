@@ -1,0 +1,101 @@
+.payment {
+  width: 50rem;
+  height: 32rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 2rem;
+
+  &__up {
+    margin-top: -6rem;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    color: white;
+
+    &--two {
+      display: flex;
+      &-box {
+        & > * {
+          & > p {
+            font-size: 0.5rem;
+          }
+          width: 8rem;
+        }
+      }
+    }
+  }
+
+  &__card {
+    width: 400px;
+
+    &--input {
+      background-color: transparent;
+      border: none;
+      color: white;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      letter-spacing: 0.12rem;
+    }
+  }
+
+  &__down {
+    margin: 0 auto;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &--box {
+      display: flex;
+      width: 25rem;
+      justify-content: space-between;
+
+      & > p {
+        font-size: 1.3rem;
+      }
+
+      & > input {
+        border: none;
+        background-color: transparent;
+        border-bottom: 2px solid black;
+        outline: none;
+      }
+    }
+  }
+
+  &__btn {
+    height: 8rem;
+    padding-top: 3rem;
+    width: 100%;
+    text-align: center;
+
+    & > * {
+      width: 25rem;
+      height: 2rem;
+      border-radius: 5px;
+      border: none;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.card__text {
+  font-size: 0.8rem;
+}
+
+.enabled {
+  background-color: rgb(112, 248, 112);
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    transform: translateY(-7px);
+  }
+}
