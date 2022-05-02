@@ -139,7 +139,7 @@ export default function Payment() {
                             <input type="text" onChange={(e) => handleChange(e, "cvv")} />
                         </div>
                     </div><div className="payment__btn">
-                        <button className={disabled ? "" : "enabled"} disabled={disabled} onClick={handleConfirm} >Confirmar el pago</button>
+                        <button className={disabled ? "" : "enabled"} disabled={disabled} onClick={handleConfirm} >Pagar {bill}€</button>
                     </div>
                 </>
             }
