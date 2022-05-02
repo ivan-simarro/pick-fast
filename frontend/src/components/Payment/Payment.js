@@ -73,6 +73,7 @@ export default function Payment() {
             }
             setCard({ ...card, number: newNumber });
         }
+        // eslint-disable-next-line
     }, [card.number]);
 
     useEffect(() => {
@@ -86,6 +87,7 @@ export default function Payment() {
             newExpir = newExpir.join('');
             setCard({ ...card, expir: newExpir });
         }
+        // eslint-disable-next-line
     }, [card.expir]);
 
     useEffect(() => {
