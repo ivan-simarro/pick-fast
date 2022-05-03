@@ -71,7 +71,7 @@
           align-items: center;
 
           &:hover {
-            background-color: rgb(83, 83, 83);
+            background-color: #20c69a;
 
             border: none;
 
@@ -124,7 +124,7 @@
     }
 
     &--item {
-      color: black;
+      color: #13232f;
     }
   }
 
@@ -160,7 +160,7 @@
 }
 
 .selected {
-  color: rgb(26, 214, 214);
+  color: #20c69a;
   transform: scale(1.3);
 }
 
