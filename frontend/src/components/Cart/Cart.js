@@ -15,7 +15,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 export default function Cart() {
     // eslint-disable-next-line
-    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected, logged, setLogged] = useOutletContext();
 
     function handleDeleteFromCart(id) {
         swalWithBootstrapButtons.fire({

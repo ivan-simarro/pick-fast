@@ -20,7 +20,7 @@ function paymentAlert() {
 }
 export default function Payment() {
     // eslint-disable-next-line
-    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected, logged, setLogged] = useOutletContext();
     const [disabled, setDisabled] = useState(true);
     const [show, setShow] = useState(false);
     const [card, setCard] = useState({

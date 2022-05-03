@@ -15,6 +15,7 @@ export default function App() {
     const [bill, setBill] = useState(0);
     const [isReverse, setIsReverse] = useState(false);
     const [selected, setSelected] = useState('');
+    const [logged, setLogged] = useState(false);
 
     useEffect(() => {
         dispatchProducts({ type: TYPES.PRODUCTS_FETCH_INIT });
@@ -69,7 +70,7 @@ export default function App() {
     return (
         <div className="app">
             <Header totalProducts={totalProducts} bill={bill} />
-            <Outlet context={[productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected]} />
+            <Outlet context={[productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected, logged, setLogged]} />
             <UpButton />
             <Footer />
         </div>

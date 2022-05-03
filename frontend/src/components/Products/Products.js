@@ -12,7 +12,7 @@ import { sortProducts } from "../Filtering/sortProducts";
 export default function Products() {
 
     // eslint-disable-next-line
-    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected] = useOutletContext();
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected, logged, setLogged] = useOutletContext();
     const [products, setProducts] = useState([]);
     const [toShow, setToShow] = useState(10);
     const [isPaginating, setIsPaginating] = useState(false);
