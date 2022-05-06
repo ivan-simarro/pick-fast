@@ -98,7 +98,7 @@ export default function Header({ totalProducts, bill }) {
                 <div id='header-cart' className="header__toPay--circle">
                     <p>{totalProducts}</p>
                 </div>
-                <p className='header__toPay--bill'>{bill}€</p>
+                <p className='header__toPay--bill'>{bill} €</p>
             </div>
         </header >
     )

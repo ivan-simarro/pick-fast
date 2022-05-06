@@ -1,12 +1,13 @@
 .payment {
-  width: 50rem;
-  height: 32rem;
+  width: 45rem;
+  height: 38rem;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   padding-bottom: 2rem;
+  background-color: rgba(19, 35, 47, 0.9);
 
   &__up {
     margin-top: -6rem;
@@ -50,6 +51,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    color: white;
 
     &--box {
       display: flex;
@@ -63,7 +65,7 @@
       & > input {
         border: none;
         background-color: transparent;
-        border-bottom: 2px solid black;
+        border-bottom: 2px solid white;
         outline: none;
       }
     }
@@ -81,21 +83,22 @@
       border-radius: 5px;
       border: none;
       font-size: 1.1rem;
+      background-color: #a0b3b0;
+    }
+
+    .enabled {
+      background-color: rgb(112, 248, 112);
+      box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+      &:hover {
+        transform: translateY(-7px);
+      }
     }
   }
 }
 
 .card__text {
   font-size: 0.8rem;
-}
-
-.enabled {
-  background-color: rgb(112, 248, 112);
-  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
-  &:hover {
-    transform: translateY(-7px);
-  }
 }
