@@ -1,7 +1,7 @@
 export default function Login({ setLogged }) {
     return (
         <div id="login">
-            <h1>¡Hola de nuevo!</h1>
+            <h1 className="form__h1">¡Hola de nuevo!</h1>
 
             <form action="/" method="post">
                 <div className="field-wrap">

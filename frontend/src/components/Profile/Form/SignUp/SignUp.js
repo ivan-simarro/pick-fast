@@ -1,7 +1,7 @@
 export default function SignUp({ setLogged }) {
     return (
         <div className="signup" >
-            <h1>Registrarse</h1>
+            <h1 className="form__h1">Registrarse</h1>
             <form action="/" method="post">
                 <div className="top-row">
                     <div className="field-wrap">

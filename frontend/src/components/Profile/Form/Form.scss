@@ -84,14 +84,11 @@ $br: 4px;
   }
 }
 
-.signup,
-.login {
-  > h1 {
-    text-align: center;
-    color: $white;
-    font-weight: $thin;
-    margin: 0 0 40px;
-  }
+.form__h1 {
+  text-align: center;
+  color: $white;
+  font-weight: $thin;
+  margin: 0 0 40px;
 }
 
 .field-wrap {
