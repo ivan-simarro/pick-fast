@@ -1,6 +1,6 @@
 export default function SignUp({ setLogged }) {
     return (
-        <div className="tab-content" >
+        <div className="signup" >
             <h1>Registrarse</h1>
             <form action="/" method="post">
                 <div className="top-row">
