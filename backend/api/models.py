@@ -1,6 +1,7 @@
 from distutils.command.upload import upload
 from django.db import models
 from django.forms import CharField
+from datetime import date
 
 
 class Product(models.Model):
@@ -17,6 +18,7 @@ class Product(models.Model):
         return self.name
 
 class Order(models.Model):
+    date = models.DateField(blank=False, default=date.today)
     user = models.EmailField(max_length = 254)
     bill = models.FloatField()
 

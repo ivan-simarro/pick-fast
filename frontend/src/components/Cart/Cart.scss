@@ -1,7 +1,6 @@
 .cart {
   width: 100%;
   padding-bottom: 5rem;
-
   &__total {
     position: absolute;
     right: 0;
@@ -14,9 +13,8 @@
     align-items: center;
     width: 50rem;
     height: 2.5rem;
-
     &--btn {
-      background-color: rgb(35, 227, 35);
+      background-color: #20c69a;
       border: none;
       border-radius: 5px;
       width: 15rem;
@@ -24,7 +22,6 @@
       font-size: 1.3rem;
       font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-
       &:hover {
         cursor: pointer;
         transition: all 0.4s ease;
@@ -32,7 +29,6 @@
       }
     }
   }
-
   &__ul {
     display: flex;
     flex-direction: column;
@@ -40,7 +36,6 @@
     list-style: none;
     gap: 30px;
   }
-
   &__bill {
     background-color: white;
     &--li {
@@ -48,7 +43,6 @@
       font-size: 1.7rem;
     }
   }
-
   &__product {
     background-color: rgba(255, 255, 255, 0.493);
     width: 100%;
@@ -56,11 +50,9 @@
     display: flex;
     position: relative;
     border-bottom: 1px solid black;
-
     &__cart {
       display: none;
     }
-
     &__top {
       flex-basis: 100%;
       padding: 1rem;
@@ -71,7 +63,6 @@
         max-height: 75%;
       }
     }
-
     &__data {
       height: 14rem;
       overflow: hidden;
@@ -79,7 +70,6 @@
       flex: auto;
       background-color: white;
       padding: 1rem;
-
       &--price,
       &--title {
         margin: 0;
@@ -89,11 +79,9 @@
         font-size: 1.3rem;
         animation: appear 1.5s ease-in-out;
       }
-
       &--title {
         flex: auto;
       }
-
       &--add {
         position: absolute;
         bottom: 1rem;
@@ -101,17 +89,14 @@
         text-align: center;
         display: flex;
         gap: 2rem;
-
         & :first-child {
           margin-left: 2.5rem;
         }
-
         & input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
           -webkit-appearance: none;
           margin: 0;
         }
-
         & input[type="number"] {
           -moz-appearance: textfield;
         }
@@ -125,7 +110,6 @@
           margin-bottom: 0.5rem;
           animation: appear 1.5s ease-out;
         }
-
         &-btn {
           width: 100%;
           & > button {
@@ -133,11 +117,11 @@
             height: 1.5rem;
             font-size: 1rem;
             width: 100%;
-            background-color: black;
+            background-color: rgba(19, 35, 47, 0.9);
             color: white;
             &:hover {
               transition: all 0.3s linear;
-              background-color: #0088c7;
+              background-color: #20c69a;
             }
           }
         }
@@ -145,14 +129,13 @@
     }
   }
 }
-
 .total {
   margin-left: 40rem;
   font-size: 1.5rem;
   bottom: 20px;
 }
-
 .empty {
   background-color: rgb(255, 82, 82);
+  color: white;
   height: 1.6rem;
 }
