@@ -3,8 +3,8 @@ from django.shortcuts import render
 from numpy import product
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Order, Product
+from .serializers import OrderSerializer, ProductSerializer
 from rest_framework import serializers
 from rest_framework import status
 
@@ -35,4 +35,10 @@ def getProducts(request):
 def getProduct(request, pk):
     products = Product.objects.get(id=pk)
     serializer = ProductSerializer(products, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getOrder(request, pk):
+    order = Order.objects.get(id=pk)
+    serializer = OrderSerializer(order, many=False)
     return Response(serializer.data)

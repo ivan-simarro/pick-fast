@@ -15,3 +15,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class Order(models.Model):
+    user = models.EmailField(max_length = 254)
+    bill = models.FloatField()
+
+    def __str__(self):
+        return self.user
