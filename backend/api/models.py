@@ -20,7 +20,7 @@ class Product(models.Model):
 class Order(models.Model):
     date = models.DateField(blank=False, default=date.today)
     user = models.EmailField(max_length = 254)
-    bill = models.FloatField()
+    bill = models.DecimalField(decimal_places=2, max_digits=10, default=0)
 
     def __str__(self):
         return self.user
