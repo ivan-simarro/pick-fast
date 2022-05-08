@@ -1,11 +1,12 @@
 import { useEffect, useReducer, useState } from 'react'
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { TYPES, initialProductsState, productsReducer, ENDPOINT_PRODUCTS } from "../reducers/productsReducer";
 import axios from 'axios';
 import './App.scss';
 import Header from './Header/Header';
 import UpButton from './UpButton/UpButton';
 import Footer from './Footer/Footer';
+import Swal from 'sweetalert2';
 
 export default function App() {
 
@@ -16,6 +17,8 @@ export default function App() {
     const [isReverse, setIsReverse] = useState(false);
     const [selected, setSelected] = useState('');
     const [logged, setLogged] = useState(false);
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         dispatchProducts({ type: TYPES.PRODUCTS_FETCH_INIT });
@@ -43,7 +46,20 @@ export default function App() {
     }, [productsState.products]);
 
     function handleToCart(id, q) {
-        dispatchProducts({ type: TYPES.ADD_TO_CART, payload: { id, q } });
+        if (logged) {
+            dispatchProducts({ type: TYPES.ADD_TO_CART, payload: { id, q } });
+        } else {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Registrate o inicia sesión antes de añadir este producto',
+                showConfirmButton: false,
+                timer: 2500
+            })
+            setTimeout(() => {
+                navigate("/profile");
+            }, 2490);
+        }
     }
 
     useEffect(() => {
@@ -58,7 +74,20 @@ export default function App() {
     }, [bill, productsState.products]);
 
     function handleAddDeleteFromFavourites(id, favourite) {
-        dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite } });
+        if (logged) {
+            dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite } });
+        } else {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Registrate o inicia sesión antes de añadir este producto',
+                showConfirmButton: false,
+                timer: 2500
+            })
+            setTimeout(() => {
+                navigate("/profile");
+            }, 2490);
+        }
     }
 
     // useEffect(() => {
