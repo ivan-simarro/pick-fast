@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import md5 from 'js-md5';
-import Swal from 'sweetalert2';
-import { postUser } from '../../profileUtils';
+import { ifDontExistsCreateUser, validateForm } from '../../profileUtils';
 
 export default function SignUp({ setLogged }) {
     const [user, setUser] = useState({
@@ -16,24 +15,8 @@ export default function SignUp({ setLogged }) {
     }
 
     function signup() {
-        if (!user.user.includes('@') || !user.user.includes('.')) {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Email incorrecto',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        } else if (user.password === md5('') || user.password.length === 0) {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Contraseña inválida',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        } else {
-            postUser(user, setLogged);
+        if (validateForm(user)) {
+            ifDontExistsCreateUser(user, setLogged);
         }
     }
 
