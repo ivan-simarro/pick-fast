@@ -1,0 +1,57 @@
+$green-ligth: #1ab188;
+
+.profileLogged {
+  display: flex;
+  height: 33.4rem;
+
+  &__left {
+    padding: 4rem 0rem;
+    width: 30%;
+    height: 100%;
+    background-color: #13232f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+    &--icon {
+      font-size: 5rem;
+      color: $green-ligth;
+    }
+
+    &--user {
+      color: white;
+      font-size: 1.7rem;
+      margin-top: -3rem;
+    }
+
+    &--data {
+      align-self: flex-start;
+      margin-left: 10%;
+      display: flex;
+      justify-content: space-between;
+      width: 25rem;
+      & > input {
+        border: none;
+        background-color: transparent;
+        border-bottom: 1.5px solid white;
+        font-size: 1rem;
+        outline: none;
+        width: 10rem;
+        height: 1.7rem;
+        color: white;
+        text-align: center;
+      }
+
+      & > label {
+        color: $green-ligth;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  &__right {
+    width: 70%;
+    height: 100%;
+  }
+}

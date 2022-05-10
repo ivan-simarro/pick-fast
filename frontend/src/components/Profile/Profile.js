@@ -1,6 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import Form from "./Form/Form";
 import "./Profile.scss";
+import ProfileLogged from "./ProfileLogged/ProfileLogged";
 
 
 export default function Profile() {
@@ -9,6 +10,6 @@ export default function Profile() {
     const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected, logged, setLogged] = useOutletContext();
 
     return logged
-        ? <h1>Ac</h1>
+        ? <ProfileLogged />
         : <Form setLogged={setLogged} />
 }

@@ -4,6 +4,8 @@ import md5 from 'js-md5';
 
 const ENDPOINT_USERS = 'http://localhost:8000/users/users/';
 
+const ENDPOINT_ORDERS = "http://localhost:8000/api/orders/";
+
 const postUser = (user, setLogged) => axios.post(ENDPOINT_USERS, user)
     .then(response => {
         Swal.fire({
@@ -103,4 +105,8 @@ export const validateForm = (user) => {
         return false;
     }
     return true;
-} 
+}
+
+export const getUserByUser = (user) => axios.get(ENDPOINT_USERS).then(res => res.data.filter(us => us.user === user));
+
+export const getOrdersByUser = (user) => axios.get(ENDPOINT_ORDERS).then(res => res.data.filter(us => us.user === user)); 
