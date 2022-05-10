@@ -1,27 +1,8 @@
 import { FaUserAlt } from "react-icons/fa";
-import { useState, useEffect } from "react";
-import { getOrdersByUser, getUserByUser } from "../profileUtils";
 import "./ProfileLogged.scss";
 import { Spinner } from "../../Loading/Spinner";
 
-export default function ProfileLogged() {
-
-    const [user, setUser] = useState({});
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        let userStorage = sessionStorage.getItem("user");
-        getUserByUser(userStorage).then(us => {
-            setUser(us[0]);
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000);
-        });
-        getOrdersByUser(userStorage).then(us => {
-            setOrders(us);
-        })
-    }, []);
+export default function ProfileLogged({ loading, user, orders }) {
 
     return (
         <div className="profileLogged">
