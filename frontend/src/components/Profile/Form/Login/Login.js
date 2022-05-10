@@ -16,6 +16,7 @@ export default function Login({ setLogged }) {
     function onLogin() {
         if (validateForm(user)) {
             login(user, setLogged);
+            sessionStorage.setItem("user", user.user);
         }
     }
 

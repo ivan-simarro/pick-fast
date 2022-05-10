@@ -49,16 +49,14 @@ export default function App() {
         if (logged) {
             dispatchProducts({ type: TYPES.ADD_TO_CART, payload: { id, q } });
         } else {
+            navigate("/profile");
             Swal.fire({
                 position: 'center',
-                icon: 'error',
+                icon: 'info',
                 title: 'Registrate o inicia sesión antes de añadir este producto',
                 showConfirmButton: false,
                 timer: 2500
             })
-            setTimeout(() => {
-                navigate("/profile");
-            }, 2490);
         }
     }
 

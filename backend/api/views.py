@@ -37,8 +37,17 @@ def getProduct(request, pk):
     serializer = ProductSerializer(products, many=False)
     return Response(serializer.data)
 
-@api_view(['GET'])
-def getOrder(request, pk):
-    order = Order.objects.get(id=pk)
-    serializer = OrderSerializer(order, many=False)
-    return Response(serializer.data)
+
+@api_view(['GET','POST'])
+def getPostOrder(request):
+    if request.method == 'GET':
+        orders = Order.objects.all()
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

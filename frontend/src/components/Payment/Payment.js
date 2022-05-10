@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { useState } from "react";
 import creditCard from "../../assets/credit-card.png";
 import { TYPES } from "../../reducers/productsReducer";
+import { postOrder } from "./paymentUtils";
 
 function paymentAlert() {
     Swal.fire({
@@ -31,6 +32,18 @@ export default function Payment() {
 
     let navigate = useNavigate();
 
+    useEffect(() => {
+        if (!logged) {
+            navigate("/profile");
+        } else {
+            paymentAlert();
+            setTimeout(() => {
+                setShow(true);
+            }, 3500);
+        }
+        // eslint-disable-next-line
+    }, []);
+
     function handleChange(e, key) {
         let eValue = e.target.value;
         if (Number.isNaN(Number(eValue)) || (eValue.length > 16 && key === "number") || (eValue.length > 4 && key === "expir") || (eValue.length > 3 && key === "cvv")) {
@@ -47,19 +60,33 @@ export default function Payment() {
         });
     }
 
+    const user = sessionStorage.getItem("user");
+
     function handleConfirm() {
-        dispatchProducts({ type: TYPES.DELETE_CART });
-        setBill(0);
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: '¡Gracias por su compra!',
-            showConfirmButton: false,
-            timer: 2000
-        })
-        setTimeout(() => {
-            navigate("/profile");
-        }, 1990);
+        postOrder(user, bill)
+            .then(res => {
+                dispatchProducts({ type: TYPES.DELETE_CART });
+                setBill(0);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '¡Gracias por su compra!',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                setTimeout(() => {
+                    navigate("/profile");
+                }, 1990);
+            })
+            .catch(err => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Ocurrió un error en su compra',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            });
     }
 
     useEffect(() => {
@@ -98,12 +125,6 @@ export default function Payment() {
         }
     }, [card.number, card.expir, card.cvv]);
 
-    useEffect(() => {
-        paymentAlert();
-        setTimeout(() => {
-            setShow(true);
-        }, 3500);
-    }, []);
 
     return (
         <div className="payment">

@@ -17,6 +17,7 @@ export default function SignUp({ setLogged }) {
     function signup() {
         if (validateForm(user)) {
             ifDontExistsCreateUser(user, setLogged);
+            sessionStorage.setItem("user", user.user);
         }
     }
 
