@@ -1,17 +1,33 @@
 import { FaUserAlt } from "react-icons/fa";
 import "./ProfileLogged.scss";
 import { Spinner } from "../../Loading/Spinner";
+import { ENDPOINT_PRODUCTS } from "../../../reducers/productsReducer";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default function ProfileLogged({ loading, user, orders }) {
+export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders }) {
+
+    const [buyedProducts, setBuyedProducts] = useState([]);
 
     function logOut() {
         sessionStorage.removeItem("user");
     }
 
+    useEffect(() => {
+        let arrayOrders = [];
+        if (!loadingOrders && products.length > 0) {
+            orders.map((or, i) => {
+                let orderIds = JSON.parse(or.products);
+                arrayOrders[i] = products.filter(p => orderIds.filter(id => id === p.id).length > 0)
+            })
+            setBuyedProducts(arrayOrders);
+        }
+    }, [loadingOrders, orders, products]);
+
     return (
         <div className="profileLogged">
             {
-                loading ?
+                loadingUser || loadingOrders ?
                     <Spinner style={{ fontSize: "5rem", color: "black", position: "absolute", top: "0", bottom: "0", right: "0", left: "0", margin: "auto", marginTop: "9rem" }} />
                     :
                     <>
@@ -37,7 +53,11 @@ export default function ProfileLogged({ loading, user, orders }) {
                             </div>
                         </div>
                         <div className="profileLogged__right">
-
+                            {
+                                buyedProducts.length > 0 && buyedProducts.map((bp, i) => {
+                                    bp.length > 0 && bp.map((p) => console.log(i, p))
+                                })
+                            }
                         </div>
                     </>
             }

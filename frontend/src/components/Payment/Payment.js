@@ -63,7 +63,14 @@ export default function Payment() {
     const user = sessionStorage.getItem("user");
 
     function handleConfirm() {
-        postOrder(user, bill)
+        let products = [];
+        productsState.products.forEach(p => {
+            if (p.inCart) {
+                products.push(p.id);
+            }
+        });
+
+        postOrder(user, bill, JSON.stringify(products))
             .then(res => {
                 dispatchProducts({ type: TYPES.DELETE_CART });
                 setBill(0);
