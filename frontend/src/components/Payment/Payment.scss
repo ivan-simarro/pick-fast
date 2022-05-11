@@ -85,7 +85,7 @@
       background-color: #79a19b;
     }
 
-    .enabled {
+    &--enabled {
       background-color: rgb(112, 248, 112);
       box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
       transition: all 0.3s ease 0s;

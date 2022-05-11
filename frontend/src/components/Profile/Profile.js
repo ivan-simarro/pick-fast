@@ -15,7 +15,7 @@ export default function Profile() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (Object.keys(user).length === 0) {
+        if (Object.keys(user).length === 0 && logged) {
 
             let userStorage = sessionStorage.getItem("user");
             getUserByUser(userStorage).then(us => {
@@ -26,7 +26,7 @@ export default function Profile() {
                 setOrders(us);
             })
         }
-    }, []);
+    }, [logged]);
 
     return logged
         ? <ProfileLogged loading={loading} user={user} orders={orders} />

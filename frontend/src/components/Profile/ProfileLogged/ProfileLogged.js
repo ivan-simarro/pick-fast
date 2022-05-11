@@ -4,6 +4,10 @@ import { Spinner } from "../../Loading/Spinner";
 
 export default function ProfileLogged({ loading, user, orders }) {
 
+    function logOut() {
+        sessionStorage.removeItem("user");
+    }
+
     return (
         <div className="profileLogged">
             {
@@ -27,6 +31,9 @@ export default function ProfileLogged({ loading, user, orders }) {
                             <div className="profileLogged__left--data">
                                 <label htmlFor="profileLogged-Pedidos">Pedidos realizados </label>
                                 <input type="text" id="profileLogged-Pedidos" value={orders.length} readOnly />
+                            </div>
+                            <div className="profileLogged__left--btn">
+                                <button onClick={logOut}>Log Out</button>
                             </div>
                         </div>
                         <div className="profileLogged__right">
