@@ -1,9 +1,7 @@
 import { FaUserAlt } from "react-icons/fa";
 import "./ProfileLogged.scss";
 import { Spinner } from "../../Loading/Spinner";
-import { ENDPOINT_PRODUCTS } from "../../../reducers/productsReducer";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders }) {
 
@@ -53,11 +51,21 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
                             </div>
                         </div>
                         <div className="profileLogged__right">
-                            {
-                                buyedProducts.length > 0 && buyedProducts.map((bp, i) => {
-                                    bp.length > 0 && bp.map((p) => console.log(i, p))
-                                })
-                            }
+                            <div className="profileLogged__right--title">
+                                <h1>Pedidos anteriores</h1>
+                            </div>
+                            <div className="profileLogged__right--orders">
+                                {
+                                    buyedProducts.length > 0 && buyedProducts.map((bp, i) => {
+                                        return bp.length > 0
+                                            && <React.Fragment key={i}><p className="profileLogged__right--orders-info">{orders[i].date} - {orders[i].bill} €</p><ul key={i}>
+                                                {bp.map((p) => {
+                                                    return <li key={p.id}><img className="profileLogged__right--img" src={p.image} alt="" /></li>
+                                                })}
+                                            </ul><hr /></React.Fragment>
+                                    })
+                                }
+                            </div>
                         </div>
                     </>
             }

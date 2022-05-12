@@ -3,10 +3,11 @@ $green-ligth: #1ab188;
 .profileLogged {
   display: flex;
   height: 33.4rem;
+  justify-content: space-between;
 
   &__left {
     padding: 4rem 0rem;
-    width: 30%;
+    width: 30rem;
     height: 100%;
     background-color: #13232f;
     display: flex;
@@ -79,7 +80,46 @@ $green-ligth: #1ab188;
   }
 
   &__right {
-    width: 70%;
+    flex-basis: 70%;
+    align-self: flex-end;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &--img {
+      min-width: 8rem;
+      max-width: 8rem;
+    }
+
+    &--title {
+      text-align: center;
+      padding-bottom: 1.5rem;
+    }
+
+    &--orders {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow: hidden;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      & > ul {
+        padding-top: 1rem;
+        list-style: none;
+        display: inline-flex;
+        gap: 40px;
+        font-size: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      &-info {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+      }
+    }
   }
 }
