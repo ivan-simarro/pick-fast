@@ -5,5 +5,7 @@ urlpatterns = [
     path('', views.getRoutes, name="routes"),
     path('products/', views.getProducts, name="products"),
     path('products/<str:pk>/', views.getProduct, name="product"),
-    path('orders/', views.getPostOrder, name="product")     
+    path('orders/', views.getPostOrder, name="order"),
+    path('favourites/', views.getPostFavourites, name="favourites"),
+    path('favourites/<str:pk>/', views.getPutFavourite, name="favourite")
 ]

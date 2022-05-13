@@ -24,3 +24,10 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user
+
+class Favourite(models.Model):
+    user = models.EmailField(max_length = 254)
+    products = models.TextField(default=json.dumps([]))
+
+    def __str__(self):
+        return self.user
