@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { login, validateForm } from "../../profileUtils";
+import { getFavouritesByUser, login, validateForm } from "../../profileUtils";
 import md5 from "js-md5";
+import { TYPES } from "../../../../reducers/productsReducer";
 
-export default function Login({ setLogged }) {
+export default function Login({ setLogged, dispatchProducts }) {
 
     const [user, setUser] = useState({
         user: '',
@@ -17,6 +18,9 @@ export default function Login({ setLogged }) {
         if (validateForm(user)) {
             login(user, setLogged);
             sessionStorage.setItem("user", user.user);
+            getFavouritesByUser(user.user).then(res => JSON.parse(res.data.products).map(id => {
+                dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite: true } });
+            }));
         }
     }
 

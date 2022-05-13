@@ -7,6 +7,7 @@ import Header from './Header/Header';
 import UpButton from './UpButton/UpButton';
 import Footer from './Footer/Footer';
 import Swal from 'sweetalert2';
+import { putFavourites } from './appUtils';
 
 export default function App() {
 
@@ -73,6 +74,14 @@ export default function App() {
 
     function handleAddDeleteFromFavourites(id, favourite) {
         if (logged) {
+            let products = [];
+            if (favourite) {
+                products = productsState.products.filter(p => p.favourite).map(p => p.id);
+                products.push(id);
+            } else {
+                products = productsState.products.filter(p => p.favourite && p.id !== id).map(p => p.id);
+            }
+            putFavourites(sessionStorage.getItem("user"), JSON.stringify(products));
             dispatchProducts({ type: TYPES.ADD_DELETE_TO_FAVOURITES, payload: { id, favourite } });
         } else {
             Swal.fire({

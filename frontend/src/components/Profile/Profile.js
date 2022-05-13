@@ -32,5 +32,5 @@ export default function Profile() {
 
     return logged
         ? <ProfileLogged products={productsState.products} loadingUser={loadingUser} loadingOrders={loadingOrders} user={user} orders={orders} />
-        : <Form setLogged={setLogged} />
+        : <Form setLogged={setLogged} dispatchProducts={dispatchProducts} />
 }

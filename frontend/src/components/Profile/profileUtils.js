@@ -6,6 +6,18 @@ const ENDPOINT_USERS = 'http://localhost:8000/users/users/';
 
 const ENDPOINT_ORDERS = "http://localhost:8000/api/orders/";
 
+const ENDPOINT_FAVOURITES = "http://localhost:8000/api/favourites/";
+
+export const getFavouritesByUser = (user) => axios.get(ENDPOINT_FAVOURITES + user);
+
+export const postUserToFavourites = (user) => axios.post(ENDPOINT_FAVOURITES, { user, products: "[]" })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        console.log("Error metiendo usuario a favoritos");
+    });
+
 const postUser = (user, setLogged) => axios.post(ENDPOINT_USERS, user)
     .then(response => {
         Swal.fire({
