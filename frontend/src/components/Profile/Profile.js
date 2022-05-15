@@ -31,6 +31,6 @@ export default function Profile() {
     }, [logged]);
 
     return logged
-        ? <ProfileLogged products={productsState.products} loadingUser={loadingUser} loadingOrders={loadingOrders} user={user} orders={orders} />
+        ? <ProfileLogged products={productsState.products} loadingUser={loadingUser} loadingOrders={loadingOrders} user={user} orders={orders} setLogged={setLogged} />
         : <Form setLogged={setLogged} dispatchProducts={dispatchProducts} />
 }

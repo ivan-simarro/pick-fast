@@ -66,7 +66,7 @@ export default function Payment() {
         let products = [];
         productsState.products.forEach(p => {
             if (p.inCart) {
-                products.push(p.id);
+                products.push({ id: p.id, q: p.q });
             }
         });
 

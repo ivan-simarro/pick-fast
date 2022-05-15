@@ -87,8 +87,8 @@ $green-ligth: #1ab188;
     flex-direction: column;
 
     &--img {
-      min-width: 8rem;
-      max-width: 8rem;
+      width: 112px;
+      height: 112px;
     }
 
     &--title {
@@ -106,19 +106,43 @@ $green-ligth: #1ab188;
         display: none;
       }
 
+      & > p {
+        background-color: rgba(26, 51, 70, 0.755);
+        text-align: center;
+        color: #ffffff;
+      }
+
       & > ul {
-        padding-top: 1rem;
         list-style: none;
         display: inline-flex;
-        gap: 40px;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
         font-size: 1.5rem;
         flex-wrap: wrap;
+        border: 1px solid black;
+        border-top: none;
+        padding-bottom: 1rem;
       }
 
       &-info {
         margin-top: 1rem;
         padding: 0.5rem;
         font-size: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &-product {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 11rem;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+        box-shadow: 0 0.2rem 0.5rem rgba(black, 0.5);
       }
     }
   }

@@ -2,25 +2,53 @@ import { FaUserAlt } from "react-icons/fa";
 import "./ProfileLogged.scss";
 import { Spinner } from "../../Loading/Spinner";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import bye from "../../../assets/bye.png";
 
-export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders }) {
+export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders, setLogged }) {
 
     const [buyedProducts, setBuyedProducts] = useState([]);
+    const [quantities, setQuantities] = useState([]);
 
     function logOut() {
         sessionStorage.removeItem("user");
+        setLogged(false);
+        Swal.fire({
+            position: 'center',
+            title: '¡Hasta pronto ' + user.name + '!',
+            showConfirmButton: false,
+            imageUrl: bye,
+            imageWidth: 236,
+            imageHeight: 264,
+            timer: 2000
+        })
     }
 
     useEffect(() => {
         let arrayOrders = [];
+        let newQuantities = [];
         if (!loadingOrders && products.length > 0) {
             orders.map((or, i) => {
-                let orderIds = JSON.parse(or.products);
+                let orderIds = JSON.parse(or.products).map(p => p.id);
+                newQuantities.push(JSON.parse(or.products).map(p => p.q));
+                console.log(JSON.parse(or.products));
                 arrayOrders[i] = products.filter(p => orderIds.filter(id => id === p.id).length > 0)
             })
+            setQuantities(newQuantities);
             setBuyedProducts(arrayOrders);
         }
     }, [loadingOrders, orders, products]);
+
+    function handleProductDetails(p) {
+        Swal.fire({
+            title: p.name + " " + p.quantity,
+            text: p.description,
+            imageUrl: p.image,
+            imageWidth: 300,
+            imageHeight: 300,
+            imageAlt: p.name,
+        })
+    }
 
     return (
         <div className="profileLogged">
@@ -58,11 +86,11 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
                                 {
                                     buyedProducts.length > 0 && buyedProducts.map((bp, i) => {
                                         return bp.length > 0
-                                            && <React.Fragment key={i}><p className="profileLogged__right--orders-info">{orders[i].date} - {orders[i].bill} €</p><ul key={i}>
-                                                {bp.map((p) => {
-                                                    return <li key={p.id}><img className="profileLogged__right--img" src={p.image} alt="" /></li>
+                                            && <React.Fragment key={i}><p className="profileLogged__right--orders-info"><span>{orders[i].date.replaceAll('-', '/')}</span><span>Total: {orders[i].bill} €</span></p><ul key={i}>
+                                                {bp.map((p, j) => {
+                                                    return <li className="profileLogged__right--orders-product" onClick={() => handleProductDetails(p)} key={p.id}><img className="profileLogged__right--img" src={p.image} alt="" /><p>x {quantities[i][j]}</p></li>
                                                 })}
-                                            </ul><hr /></React.Fragment>
+                                            </ul></React.Fragment>
                                     })
                                 }
                             </div>
