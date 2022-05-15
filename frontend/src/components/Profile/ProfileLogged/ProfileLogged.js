@@ -12,6 +12,7 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
 
     function logOut() {
         sessionStorage.removeItem("user");
+        sessionStorage.removeItem("cart");
         setLogged(false);
         Swal.fire({
             position: 'center',
@@ -31,8 +32,8 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
             orders.map((or, i) => {
                 let orderIds = JSON.parse(or.products).map(p => p.id);
                 newQuantities.push(JSON.parse(or.products).map(p => p.q));
-                console.log(JSON.parse(or.products));
-                arrayOrders[i] = products.filter(p => orderIds.filter(id => id === p.id).length > 0)
+                arrayOrders[i] = products.filter(p => orderIds.filter(id => id === p.id).length > 0);
+                return or;
             })
             setQuantities(newQuantities);
             setBuyedProducts(arrayOrders);

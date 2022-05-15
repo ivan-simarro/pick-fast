@@ -22,6 +22,16 @@ export default function App() {
     let navigate = useNavigate();
 
     useEffect(() => {
+        if (logged) {
+            let sessionProducts = JSON.parse(sessionStorage.getItem("cart"));
+            sessionProducts.map(p => {
+                dispatchProducts({ type: TYPES.CART_ASSIGNMENT_AUTOMATIC, payload: { id: p.id, q: p.q } });
+                return p;
+            });
+        }
+    }, [logged]);
+
+    useEffect(() => {
         dispatchProducts({ type: TYPES.PRODUCTS_FETCH_INIT });
         axios.get(ENDPOINT_PRODUCTS)
             .then(res => {
@@ -48,7 +58,8 @@ export default function App() {
 
     function handleToCart(id, q) {
         if (logged) {
-            dispatchProducts({ type: TYPES.ADD_TO_CART, payload: { id, q } });
+            let productToCart = { id, q };
+            dispatchProducts({ type: TYPES.ADD_TO_CART, payload: productToCart });
         } else {
             navigate("/profile");
             Swal.fire({
@@ -71,6 +82,12 @@ export default function App() {
         })
         setTotalProducts(total);
     }, [bill, productsState.products]);
+
+    useEffect(() => {
+        if (productsState.products.filter(p => p.inCart).length > 0) {
+            sessionStorage.setItem("cart", JSON.stringify(productsState.products.filter(p => p.inCart).map(p => { return { id: p.id, q: p.q } })));
+        }
+    }, [productsState.products]);
 
     function handleAddDeleteFromFavourites(id, favourite) {
         if (logged) {
@@ -96,12 +113,6 @@ export default function App() {
             }, 2490);
         }
     }
-
-    // useEffect(() => {
-    //     window.onbeforeunload = function (e) {
-    //         return "Perderás los productos de tu carrito";
-    //     };
-    // }, []);
 
     return (
         <div className="app">

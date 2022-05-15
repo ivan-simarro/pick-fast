@@ -6,7 +6,8 @@ const TYPES = {
     ADD_TO_CART: "ADD_TO_CART",
     DELETE_PRODUCT_FROM_CART: "DELETE_PRODUCT_FROM_CART",
     ADD_DELETE_TO_FAVOURITES: "ADD_DELETE_TO_FAVOURITES",
-    DELETE_CART: "DELETE_CART"
+    DELETE_CART: "DELETE_CART",
+    CART_ASSIGNMENT_AUTOMATIC: "CART_ASSIGNMENT_AUTOMATIC"
 }
 
 const initialProductsState = {
@@ -82,6 +83,17 @@ const productsReducer = (state, action) => {
                 ...state,
                 products: state.products.map((p) => {
                     return { ...p, inCart: false, q: 0 }
+                })
+            }
+        case "CART_ASSIGNMENT_AUTOMATIC":
+            return {
+                ...state,
+                products: state.products.map((p) => {
+                    if (p.id === action.payload.id) {
+                        return { ...p, inCart: true, q: action.payload.q }
+                    } else {
+                        return p
+                    }
                 })
             }
         default:
