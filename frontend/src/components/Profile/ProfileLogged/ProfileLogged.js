@@ -4,8 +4,18 @@ import { Spinner } from "../../Loading/Spinner";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import bye from "../../../assets/bye.png";
+import { useNavigate } from "react-router-dom";
+import { TYPES } from "../../../reducers/productsReducer";
 
-export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders, setLogged }) {
+const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn-alert btn-success',
+        cancelButton: 'btn-alert btn-danger'
+    },
+    buttonsStyling: false
+})
+
+export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders, setLogged, handleToCart, dispatchProducts }) {
 
     const [buyedProducts, setBuyedProducts] = useState([]);
     const [quantities, setQuantities] = useState([]);
@@ -50,6 +60,29 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
             imageAlt: p.name,
         })
     }
+    let navigate = useNavigate();
+
+    function handleRepeat(order, index) {
+        swalWithBootstrapButtons.fire({
+            title: '¿Quieres repetir el pedido?',
+            text: "Perderá todos los artículos del carrito",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Repetir',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatchProducts({ type: TYPES.DELETE_CART });
+                let q = quantities[index];
+                dispatchProducts({ type: TYPES.DELETE_CART });
+                for (let i in order) {
+                    handleToCart(order[i].id, q[i]);
+                }
+                navigate("/cart");
+            }
+        })
+    }
 
     return (
         <div className="profileLogged">
@@ -87,7 +120,7 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
                                 {
                                     buyedProducts.length > 0 && buyedProducts.map((bp, i) => {
                                         return bp.length > 0
-                                            && <React.Fragment key={i}><p className="profileLogged__right--orders-info"><span>{orders[i].date.replaceAll('-', '/')}</span><span>Total: {orders[i].bill} €</span></p><ul key={i}>
+                                            && <React.Fragment key={i}><p className="profileLogged__right--orders-info"><span>{orders[i].date.replaceAll('-', '/')}</span><span style={{ cursor: "pointer" }} onClick={() => handleRepeat(bp, i)}>Repetir pedido</span><span>Total: {orders[i].bill} €</span></p><ul key={i}>
                                                 {bp.map((p, j) => {
                                                     return <li className="profileLogged__right--orders-product" onClick={() => handleProductDetails(p)} key={p.id}><img className="profileLogged__right--img" src={p.image} alt="" /><p>x {quantities[i][j]}</p></li>
                                                 })}

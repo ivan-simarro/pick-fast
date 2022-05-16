@@ -24,10 +24,12 @@ export default function App() {
     useEffect(() => {
         if (logged) {
             let sessionProducts = JSON.parse(sessionStorage.getItem("cart"));
-            sessionProducts.map(p => {
-                dispatchProducts({ type: TYPES.CART_ASSIGNMENT_AUTOMATIC, payload: { id: p.id, q: p.q } });
-                return p;
-            });
+            if (sessionProducts !== null) {
+                sessionProducts.map(p => {
+                    dispatchProducts({ type: TYPES.CART_ASSIGNMENT_AUTOMATIC, payload: { id: p.id, q: p.q } });
+                    return p;
+                });
+            }
         }
     }, [logged]);
 
