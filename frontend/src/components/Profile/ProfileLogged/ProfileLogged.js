@@ -36,6 +36,12 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
     }
 
     useEffect(() => {
+        orders.length > 0 && orders.sort(function (a, b) {
+            return b.id - a.id;
+        });
+    }, [orders]);
+
+    useEffect(() => {
         let arrayOrders = [];
         let newQuantities = [];
         if (!loadingOrders && products.length > 0) {
