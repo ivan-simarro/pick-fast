@@ -1,15 +1,25 @@
 import "./Contact.scss";
 import logo from "../../assets/logo.png";
 import React, { useState } from "react";
-import { animateMessage, initialMessagesState, whatDoYouNeed } from "./contactUtils";
+import { getOrdersByUser } from "../Profile/profileUtils";
+import { firstResponse, initialMessagesState, lastResponse, nextMessage, whatDoYouNeed } from "./contactUtils";
 import { IoSendSharp } from "react-icons/io5";
 import { useEffect } from "react";
+import { AiOutlineReload } from "react-icons/ai";
 
 export default function Contact() {
     const [messages, setMessages] = useState(initialMessagesState);
     const [newMessage, setNewMessage] = useState(sessionStorage.getItem("message") || "");
+    const [orders, setOrders] = useState([]);
+    const [finished, setFinished] = useState(false);
 
-    let conversation = document.querySelector('.conversation-container');
+    let currentTime = new Date();
+
+    useEffect(() => {
+        setInterval(() => {
+            currentTime = new Date();
+        }, 60000);
+    }, []);
 
     function handleSelected(newMess) {
         if (messages.length % 2 === 0) {
@@ -24,18 +34,41 @@ export default function Contact() {
             return;
         }
         setMessages([...messages, newMessage]);
-        sessionStorage.removeItem("message");
         setNewMessage("");
     }
 
     useEffect(() => {
+        let conversation = document.querySelector('.conversation-container');
         if (conversation != null) conversation.scrollTop = conversation.scrollHeight;
+    });
+
+    useEffect(() => {
         if (messages.length % 2 === 0) {
             // setTimeout(function () {
             //     let tick = document.getElementById("sent" + messages.length - 1);
             //     console.log(tick);
             //     tick.classList.remove('tick-animation');
             // }, 1500);
+            setTimeout(() => {
+                if (orders.length > 0 && orders.filter(or => or.date.replaceAll('-', '/') === sessionStorage.getItem("message").slice(0, 10)).length > 0) {
+                    setMessages([...messages, lastResponse[0]]);
+                    sessionStorage.removeItem("message");
+                    setTimeout(() => {
+                        setFinished(true);
+                    }, 4000);
+                    return;
+                }
+                let nextMessageToSend = nextMessage(sessionStorage.getItem("message"));
+                switch (nextMessageToSend) {
+                    case firstResponse[0]:
+                        getOrdersByUser(sessionStorage.getItem("user")).then(res => { setOrders(res.slice(-5)) });
+                        break;
+                    default:
+                        break;
+                }
+                sessionStorage.removeItem("message");
+                setMessages([...messages, nextMessageToSend]);
+            }, 2500);
         }
     }, [messages])
 
@@ -43,6 +76,14 @@ export default function Contact() {
     return (
         <div className="page">
             <div className="marvel-device nexus5">
+                {
+                    finished && <div className="refresh" onClick={() => {
+                        setMessages(initialMessagesState);
+                        setFinished(false);
+                    }}>
+                        <p><AiOutlineReload /><br /> Comentar un nuevo problema</p>
+                    </div>
+                }
                 <div className="top-bar"></div>
                 <div className="sleep"></div>
                 <div className="volume"></div>
@@ -50,19 +91,8 @@ export default function Contact() {
                 <div className="screen">
                     <div className="screen-container">
                         <div className="status-bar">
-                            <div className="time"></div>
-                            <div className="battery">
-                                <i className="zmdi zmdi-battery"></i>
-                            </div>
-                            <div className="network">
-                                <i className="zmdi zmdi-network"></i>
-                            </div>
-                            <div className="wifi">
-                                <i className="zmdi zmdi-wifi-alt-2"></i>
-                            </div>
-                            <div className="star">
-                                <i className="zmdi zmdi-star"></i>
-                            </div>
+                            <div className="time">{currentTime.getHours() + ":" + (currentTime.getMinutes() < 10 ? "0" + currentTime.getMinutes().toString() : currentTime.getMinutes())}</div>
+                            <div className="date">{currentTime.getDate() + " de " + new Intl.DateTimeFormat('es-ES', { month: "short" }).format(currentTime)}</div>
                         </div>
                         <div className="chat">
                             <div className="chat-container">
@@ -104,10 +134,24 @@ export default function Contact() {
                                                         }
                                                     </React.Fragment>
                                                     :
-                                                    <div key={i} className="message received">
-                                                        {m}
-                                                        <span className="metadata"><span className="time"></span></span>
-                                                    </div>
+                                                    messages[i] === firstResponse[0] ?
+                                                        <React.Fragment key={i}>
+                                                            <div className="message received">
+                                                                {m}
+                                                                <span className="metadata"><span className="time"></span></span>
+                                                            </div>
+                                                            {
+                                                                orders.map((or, i) => {
+                                                                    let mess = or.date.replaceAll('-', '/') + " - " + or.bill;
+                                                                    return <div key={or.bill + i} onClick={() => handleSelected(mess)} className="message received whatDoYouNeed">{mess} €</div>
+                                                                })
+                                                            }
+                                                        </React.Fragment>
+                                                        :
+                                                        <div key={i} className="message received">
+                                                            {m}
+                                                            <span className="metadata"><span className="time"></span></span>
+                                                        </div>
                                                 :
                                                 <div key={i} className="message sent" id={"sent" + i}>
                                                     {m}

@@ -16,6 +16,7 @@ export default function Header({ totalProducts, bill }) {
     useEffect(() => {
         (location === "/cart" || location === "/payment") && setSelected(2);
         location === "/profile" && setSelected(4);
+        location === "/contact" && setSelected(5);
     }, [location]);
 
     return (

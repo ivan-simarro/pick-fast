@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .marvel-device .screen {
@@ -24,6 +25,13 @@
   color: #fff;
   font-size: 14px;
   padding: 0 8px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+
+  & > * {
+    padding-top: 0.35rem;
+  }
 }
 
 .status-bar:after {
@@ -33,12 +41,15 @@
 }
 
 .status-bar div {
-  float: right;
-  position: relative;
   top: 50%;
   transform: translateY(-50%);
   margin: 0 0 0 8px;
   font-weight: 600;
+  position: relative;
+}
+
+.date {
+  padding-right: 9rem;
 }
 
 /* Chat */
@@ -417,5 +428,30 @@
   margin-left: 1rem;
   &:hover {
     transform: scale(1.1);
+  }
+}
+
+.refresh {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.653);
+  height: 34rem;
+  width: 28rem;
+  z-index: 10;
+  cursor: pointer;
+
+  & > p {
+    height: 8rem;
+    position: absolute;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.815);
+    text-align: center;
+    & svg {
+      font-size: 5rem;
+    }
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
   }
 }
