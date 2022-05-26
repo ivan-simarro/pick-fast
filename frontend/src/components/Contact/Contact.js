@@ -2,23 +2,28 @@ import "./Contact.scss";
 import logo from "../../assets/logo.png";
 import React, { useState } from "react";
 import { getOrdersByUser } from "../Profile/profileUtils";
-import { firstResponse, initialMessagesState, lastResponse, nextMessage, whatDoYouNeed } from "./contactUtils";
+import { firstResponse, initialMessagesState, finish, nextMessage, whatDoYouNeed } from "./contactUtils";
 import { IoSendSharp } from "react-icons/io5";
 import { useEffect } from "react";
 import { AiOutlineReload } from "react-icons/ai";
+import { useOutletContext } from "react-router-dom";
 
 export default function Contact() {
     const [messages, setMessages] = useState(initialMessagesState);
     const [newMessage, setNewMessage] = useState(sessionStorage.getItem("message") || "");
     const [orders, setOrders] = useState([]);
+    const [products, setProducts] = useState([]);
     const [finished, setFinished] = useState(false);
+    // eslint-disable-next-line
+    const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected, logged, setLogged] = useOutletContext();
+
 
     let currentTime = new Date();
 
     useEffect(() => {
         setInterval(() => {
             currentTime = new Date();
-        }, 60000);
+        }, 30000);
     }, []);
 
     function handleSelected(newMess) {
@@ -50,18 +55,18 @@ export default function Contact() {
             //     tick.classList.remove('tick-animation');
             // }, 1500);
             setTimeout(() => {
-                if (orders.length > 0 && orders.filter(or => or.date.replaceAll('-', '/') === sessionStorage.getItem("message").slice(0, 10)).length > 0) {
-                    setMessages([...messages, lastResponse[0]]);
-                    sessionStorage.removeItem("message");
-                    setTimeout(() => {
-                        setFinished(true);
-                    }, 4000);
+                if (orders.length > 0 && orders.filter(or => or.date.replaceAll('-', '/') === sessionStorage.getItem("message").slice(0, 10)).length > 0 || products.length > 0) {
+                    const isForOrders = orders.length > 0;
+                    finish(setMessages, messages, isForOrders ? 0 : 1, setFinished);
                     return;
                 }
                 let nextMessageToSend = nextMessage(sessionStorage.getItem("message"));
                 switch (nextMessageToSend) {
                     case firstResponse[0]:
                         getOrdersByUser(sessionStorage.getItem("user")).then(res => { setOrders(res.slice(-5)) });
+                        break;
+                    case firstResponse[1]:
+                        getOrdersByUser(sessionStorage.getItem("user")).then(res => { setProducts(JSON.parse(res.slice(-1)[0].products)) });
                         break;
                     default:
                         break;
@@ -71,7 +76,7 @@ export default function Contact() {
             }, 2500);
         }
     }, [messages])
-
+    console.log(products);
 
     return (
         <div className="page">
@@ -80,6 +85,7 @@ export default function Contact() {
                     finished && <div className="refresh" onClick={() => {
                         setMessages(initialMessagesState);
                         setFinished(false);
+                        orders.length > 0 ? setOrders([]) : setProducts([]);
                     }}>
                         <p><AiOutlineReload /><br /> Comentar un nuevo problema</p>
                     </div>
@@ -147,11 +153,25 @@ export default function Contact() {
                                                                 })
                                                             }
                                                         </React.Fragment>
-                                                        :
-                                                        <div key={i} className="message received">
-                                                            {m}
-                                                            <span className="metadata"><span className="time"></span></span>
-                                                        </div>
+                                                        : messages[i] === firstResponse[1] ?
+                                                            <React.Fragment key={i}>
+                                                                <div className="message received">
+                                                                    {m}
+                                                                    <span className="metadata"><span className="time"></span></span>
+                                                                </div>
+                                                                {
+                                                                    products.map((p, i) => {
+                                                                        let product = productsState.products.filter(pro => pro.id === p.id)[0];
+                                                                        console.log(product);
+                                                                        return <div key={product.name + i} onClick={() => handleSelected(product.name)} className="message received whatDoYouNeed">{product.name}</div>
+                                                                    })
+                                                                }
+                                                            </React.Fragment>
+                                                            :
+                                                            <div key={i} className="message received">
+                                                                {m}
+                                                                <span className="metadata"><span className="time"></span></span>
+                                                            </div>
                                                 :
                                                 <div key={i} className="message sent" id={"sent" + i}>
                                                     {m}

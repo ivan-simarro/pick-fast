@@ -1,6 +1,6 @@
 export const whatDoYouNeed = [
     "El pedido no se ha recibido",
-    "El pedido recibido es incorrecto",
+    "Falta un artículo en mi pedido",
     "El pedido recibido está dañado",
     "Me han cobrado dos veces el pedido",
     "Me da un error al realizar el pago"
@@ -8,26 +8,18 @@ export const whatDoYouNeed = [
 const user = sessionStorage.getItem("user");
 export const initialMessagesState = ["Hola " + user + ", ¿en qué podemos ayudarte?"];
 export const sorryMessage = user + " sentimos mucho tu preocupación. ";
-
-export const notArrived = [
-    "El pedido no se ha recibido",
-    "El pedido recibido es incorrecto",
-    "El pedido recibido está dañado",
-    "Me han cobrado dos veces el pedido",
-    "Me da un error al realizar el pago",
-];
+const finalMessage = "Muchas gracias por contactar con Pick Fast, seguimos aquí para lo que necesites.";
 
 export const firstResponse = {
     0: sorryMessage + "¿Podrías indicarnos a qué pedido te refieres?",
-    1: sorryMessage,
+    1: sorryMessage + "¿Podrías indicarnos a qué producto te refieres?",
     2: sorryMessage,
     3: sorryMessage,
     4: sorryMessage
 }
-
-export const lastResponse = {
-    0: "No te preocupes " + user + ", ¡tu pedido sigue en plazo de entrega! Muchas gracias por contactar con Pick Fast, seguimos aquí para lo que necesites.",
-    1: sorryMessage,
+const lastResponse = {
+    0: "No te preocupes " + user + ", ¡tu pedido sigue en plazo de entrega! " + finalMessage,
+    1: user + " sentimos mucho los ocurrido. Te será reembolsado el importe del producto de 5 a 7 días hábiles. " + finalMessage,
     2: sorryMessage,
     3: sorryMessage,
     4: sorryMessage
@@ -37,7 +29,7 @@ export const nextMessage = (sentMessage) => {
     switch (sentMessage) {
         case "El pedido no se ha recibido":
             return firstResponse[0];
-        case "El pedido recibido es incorrecto":
+        case "Falta un artículo en mi pedido":
             return firstResponse[1];
         case "El pedido recibido está dañado":
             return firstResponse[2];
@@ -46,4 +38,13 @@ export const nextMessage = (sentMessage) => {
         case "Me da un error al realizar el pago":
             return firstResponse[4];
     }
+}
+
+
+export const finish = (setMessages, messages, index, setFinished) => {
+    setMessages([...messages, lastResponse[index]]);
+    sessionStorage.removeItem("message");
+    setTimeout(() => {
+        setFinished(true);
+    }, 4000);
 }
