@@ -14,15 +14,13 @@ export default function Contact() {
     const [orders, setOrders] = useState([]);
     const [products, setProducts] = useState([]);
     const [finished, setFinished] = useState(false);
+    const [currentTime, setCurrentTime] = useState(new Date());
     // eslint-disable-next-line
     const [productsState, dispatchProducts, handleToCart, handleAddDeleteFromFavourites, searchTerm, setSearchTerm, bill, setBill, isReverse, setIsReverse, selected, setSelected, logged, setLogged] = useOutletContext();
 
-
-    let currentTime = new Date();
-
     useEffect(() => {
         setInterval(() => {
-            currentTime = new Date();
+            setCurrentTime(new Date());
         }, 30000);
     }, []);
 
@@ -55,7 +53,7 @@ export default function Contact() {
             //     tick.classList.remove('tick-animation');
             // }, 1500);
             setTimeout(() => {
-                if (orders.length > 0 && orders.filter(or => or.date.replaceAll('-', '/') === sessionStorage.getItem("message").slice(0, 10)).length > 0 || products.length > 0) {
+                if ((orders.length > 0 && orders.filter(or => or.date.replaceAll('-', '/') === sessionStorage.getItem("message").slice(0, 10)).length > 0) || products.length > 0) {
                     const isForOrders = orders.length > 0;
                     finish(setMessages, messages, isForOrders ? 0 : 1, setFinished);
                     return;
@@ -63,20 +61,22 @@ export default function Contact() {
                 let nextMessageToSend = nextMessage(sessionStorage.getItem("message"));
                 switch (nextMessageToSend) {
                     case firstResponse[0]:
+                    case firstResponse[3]:
                         getOrdersByUser(sessionStorage.getItem("user")).then(res => { setOrders(res.slice(-5)) });
                         break;
                     case firstResponse[1]:
+                    case firstResponse[2]:
                         getOrdersByUser(sessionStorage.getItem("user")).then(res => { setProducts(JSON.parse(res.slice(-1)[0].products)) });
                         break;
                     default:
                         break;
                 }
-                sessionStorage.removeItem("message");
                 setMessages([...messages, nextMessageToSend]);
+                sessionStorage.removeItem("message");
             }, 2500);
         }
+        // eslint-disable-next-line
     }, [messages])
-    console.log(products);
 
     return (
         <div className="page">
@@ -140,7 +140,7 @@ export default function Contact() {
                                                         }
                                                     </React.Fragment>
                                                     :
-                                                    messages[i] === firstResponse[0] ?
+                                                    messages[i] === firstResponse[0] || messages[i] === firstResponse[3] ?
                                                         <React.Fragment key={i}>
                                                             <div className="message received">
                                                                 {m}
@@ -153,7 +153,7 @@ export default function Contact() {
                                                                 })
                                                             }
                                                         </React.Fragment>
-                                                        : messages[i] === firstResponse[1] ?
+                                                        : messages[i] === firstResponse[1] || messages[i] === firstResponse[2] ?
                                                             <React.Fragment key={i}>
                                                                 <div className="message received">
                                                                     {m}
