@@ -4,6 +4,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
+        "django": "cd ./backend && pip3 install requirements.txt",
         "front": "cd ./frontend && yarn start",
         "back": "cd ./backend && python3 manage.py runserver",
         "start": "npm-run-all --parallel front back"
