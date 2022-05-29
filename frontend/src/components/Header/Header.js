@@ -14,9 +14,26 @@ export default function Header({ totalProducts, bill }) {
     const [selected, setSelected] = useState(1);
 
     useEffect(() => {
-        (location === "/cart" || location === "/payment") && setSelected(2);
-        location === "/profile" && setSelected(4);
-        location === "/contact" && setSelected(5);
+        switch (location) {
+            case "/":
+                setSelected(1);
+                break;
+            case "/cart":
+            case "/payment":
+                setSelected(2);
+                break;
+            case "/favourites":
+                setSelected(3);
+                break;
+            case "/profile":
+                setSelected(4);
+                break;
+            case "/contact":
+                setSelected(5);
+                break;
+            default:
+                break;
+        }
     }, [location]);
 
     return (

@@ -17,7 +17,7 @@ export default function App() {
     const [bill, setBill] = useState(0);
     const [isReverse, setIsReverse] = useState(false);
     const [selected, setSelected] = useState('');
-    const [logged, setLogged] = useState(false);
+    const [logged, setLogged] = useState(sessionStorage.getItem("user") != null);
 
     let navigate = useNavigate();
 

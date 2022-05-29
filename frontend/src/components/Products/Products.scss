@@ -10,22 +10,27 @@
 }
 
 .paginado {
-  background-color: transparent;
-  border: none;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
   width: 15rem;
-  font-size: 2.2rem;
-  cursor: pointer;
-  color: black;
   position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
   margin: auto;
   margin-bottom: 9.5rem;
+  background-color: #20c69a;
+  border-radius: 5px;
+  border: 1px solid #218a6c;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 24px;
+  padding: 8px 31px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2f6627;
+  transition: all 0.5s ease-in-out;
   &:hover {
-    transition: all 0.75s ease;
-    transform: scale(1.2);
+    background-color: lighten($color: #47d2ad, $amount: 0);
+    transform: translateY(-5px);
   }
 }

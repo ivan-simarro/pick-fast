@@ -6,7 +6,6 @@ export const whatDoYouNeed = [
     "Me da un error al realizar el pago"
 ];
 const user = sessionStorage.getItem("user");
-export const initialMessagesState = ["Hola " + user + ", ¿en qué podemos ayudarte?"];
 export const sorryMessage = user + " sentimos mucho tu preocupación. ";
 const finalMessage = "Muchas gracias por contactar con Pick Fast, seguimos aquí para lo que necesites.";
 
