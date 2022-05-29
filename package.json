@@ -5,7 +5,7 @@
     "private": true,
     "scripts": {
         "front": "cd ./frontend && yarn start",
-        "back": "cd ./backend && pip3 install -r requirements.txt && python3 manage.py runserver",
+        "back": "cd ./backend && python3 manage.py runserver",
         "start": "npm-run-all --parallel front back"
     },
     "dependencies": {
