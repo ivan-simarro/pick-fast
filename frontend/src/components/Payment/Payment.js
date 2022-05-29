@@ -96,16 +96,20 @@ export default function Payment() {
             });
     }
 
+    function separateNumbers(element, len) {
+        let numberArr = element.split("");
+        let newNumber = '';
+        for (let i = 0; i < len; i++) {
+            if (i === 4 || i === 8 || i === 12) newNumber += " "
+            newNumber += numberArr[i];
+        }
+        return newNumber;
+    }
+
     useEffect(() => {
         let len = card.number.length;
         if (len === 16) {
-            let numberArr = card.number.split("");
-            let newNumber = '';
-            for (let i = 0; i < len; i++) {
-                if (i === 4 || i === 8 || i === 12) newNumber += " "
-                newNumber += numberArr[i];
-            }
-            setCard({ ...card, number: newNumber });
+            setCard({ ...card, number: separateNumbers(card.number, len) });
         }
         // eslint-disable-next-line
     }, [card.number]);

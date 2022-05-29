@@ -29,7 +29,7 @@ export default function Products() {
     useEffect(() => {
         toShow !== 10 && setToShow(10);
         // eslint-disable-next-line
-    }, [searchTerm, products]);
+    }, [searchTerm, products, location]);
 
     function paginating() {
         setIsPaginating(true);
@@ -80,7 +80,7 @@ export default function Products() {
                                     <Product key={product.id} product={product} handleToCart={handleToCart} handleAddDeleteFromFavourites={handleAddDeleteFromFavourites} />
                                     : i < toShow && < Product key={product.id} product={product} handleToCart={handleToCart} handleAddDeleteFromFavourites={handleAddDeleteFromFavourites} setSelected={setSelected} setIsReverse={setIsReverse} />
                             })}</ul>{
-                                location !== "/cart" && !isPaginating ? products.filter(p => filtering(p, type, searchTerm)).length >= toShow && <button className="paginado" onClick={paginating}>Ver más</button>
+                                location !== "/cart" && !isPaginating ? products.filter(p => filtering(p, type, searchTerm)).length > toShow && <button className="paginado" onClick={paginating}>Ver más</button>
                                     : <Spinner style={{ fontSize: "5rem", color: "black", position: "absolute", bottom: "0", right: "0", left: "0", margin: "auto", marginBottom: "9.5rem" }} />
                             }</>
                         : <Spinner style={{ fontSize: "5rem", color: "black", position: "absolute", top: "0", bottom: "0", right: "0", left: "0", margin: "auto", marginTop: "9rem" }} />
