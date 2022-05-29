@@ -7,7 +7,7 @@
         "django": "cd ./backend && pip3 install requirements.txt",
         "front": "cd ./frontend && yarn start",
         "back": "cd ./backend && python3 manage.py runserver",
-        "start": "npm-run-all --parallel front back"
+        "start": "npm-run-all --parallel django front back"
     },
     "dependencies": {
         "npm-run-all": "^4.1.5",
