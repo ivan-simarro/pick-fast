@@ -3,7 +3,7 @@ import "./Form.scss";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 
-export default function Form({ setLogged, dispatchProducts }) {
+export default function Form({ setLogged, dispatchProducts, setDoingLogin }) {
 
     const [form, setForm] = useState(0);
 
@@ -15,7 +15,7 @@ export default function Form({ setLogged, dispatchProducts }) {
                 <li className={form === 1 ? "tab active" : "tab"} onClick={() => setForm(1)} > <a className="form__group--nav" href="http://localhost:3000/profile#login" onClick={(e) => e.nativeEvent.preventDefault()}>Log In</a></li >
             </ul >
             {
-                form === 0 ? <SignUp setLogged={setLogged} /> : <Login setLogged={setLogged} dispatchProducts={dispatchProducts} />
+                form === 0 ? <SignUp setLogged={setLogged} setDoingLogin={setDoingLogin} /> : <Login setLogged={setLogged} dispatchProducts={dispatchProducts} setDoingLogin={setDoingLogin} />
             }
         </div >
     )

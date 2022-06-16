@@ -15,7 +15,7 @@ const swalWithBootstrapButtons = Swal.mixin({
     buttonsStyling: false
 })
 
-export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders, setLogged, handleToCart, dispatchProducts }) {
+export default function ProfileLogged({ products, loadingUser, loadingOrders, user, orders, setLogged, handleToCart, dispatchProducts, setDoingLogin }) {
 
     const [buyedProducts, setBuyedProducts] = useState([]);
     const [quantities, setQuantities] = useState([]);
@@ -24,6 +24,7 @@ export default function ProfileLogged({ products, loadingUser, loadingOrders, us
         sessionStorage.removeItem("user");
         sessionStorage.removeItem("cart");
         setLogged(false);
+        setDoingLogin(false);
         Swal.fire({
             position: 'center',
             title: '¡Hasta pronto ' + user.name + '!',

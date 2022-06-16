@@ -14,11 +14,11 @@ export default function Profile() {
     const [orders, setOrders] = useState([]);
     const [loadingUser, setLoadingUser] = useState(true);
     const [loadingOrders, setLoadingOrders] = useState(true);
+    const [doingLogin, setDoingLogin] = useState(false);
 
     useEffect(() => {
-        if (Object.keys(user).length === 0 && logged) {
-
-            let userStorage = sessionStorage.getItem("user");
+        let userStorage = sessionStorage.getItem("user");
+        if (Object.keys(user).length === 0 && logged || (doingLogin && userStorage != null)) {
             getUserByUser(userStorage).then(us => {
                 setUser(us[0]);
                 setLoadingUser(false);
@@ -28,9 +28,9 @@ export default function Profile() {
                 setLoadingOrders(false);
             })
         }
-    }, [logged]);
+    }, [logged, doingLogin]);
 
     return logged
-        ? <ProfileLogged products={productsState.products} loadingUser={loadingUser} loadingOrders={loadingOrders} user={user} orders={orders} setLogged={setLogged} handleToCart={handleToCart} dispatchProducts={dispatchProducts} />
-        : <Form setLogged={setLogged} dispatchProducts={dispatchProducts} />
+        ? <ProfileLogged products={productsState.products} loadingUser={loadingUser} loadingOrders={loadingOrders} user={user} orders={orders} setLogged={setLogged} handleToCart={handleToCart} dispatchProducts={dispatchProducts} setDoingLogin={setDoingLogin} />
+        : <Form setLogged={setLogged} dispatchProducts={dispatchProducts} setDoingLogin={setDoingLogin} />
 }

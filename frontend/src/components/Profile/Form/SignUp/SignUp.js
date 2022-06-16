@@ -2,7 +2,7 @@ import { useState } from 'react';
 import md5 from 'js-md5';
 import { ifDontExistsCreateUser, validateForm, postUserToFavourites } from '../../profileUtils';
 
-export default function SignUp({ setLogged }) {
+export default function SignUp({ setLogged, setDoingLogin }) {
     const [user, setUser] = useState({
         name: '',
         lastName: '',
@@ -18,6 +18,7 @@ export default function SignUp({ setLogged }) {
         if (validateForm(user)) {
             ifDontExistsCreateUser(user, setLogged);
             sessionStorage.setItem("user", user.user);
+            setDoingLogin(true);
             postUserToFavourites(user.user);
         }
     }
