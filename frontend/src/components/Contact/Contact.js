@@ -69,17 +69,17 @@ export default function Contact() {
             setTimeout(() => {
                 if ((orders.length > 0 && orders.filter(or => or.date.replaceAll('-', '/') === sessionStorage.getItem("message").slice(0, 10)).length > 0) || products.length > 0) {
                     const isForOrders = orders.length > 0;
-                    finish(setMessages, messages, isForOrders ? 0 : 1, setFinished);
+                    finish(setMessages, messages, isForOrders ? 0 : 1, setFinished, sessionStorage.getItem("user"));
                     return;
                 }
-                let nextMessageToSend = nextMessage(sessionStorage.getItem("message"));
+                let nextMessageToSend = nextMessage(sessionStorage.getItem("message"), sessionStorage.getItem("user"));
                 switch (nextMessageToSend) {
-                    case firstResponse[0]:
-                    case firstResponse[3]:
+                    case firstResponse(sessionStorage.getItem("user"), 0):
+                    case firstResponse(sessionStorage.getItem("user"), 3):
                         getOrdersByUser(sessionStorage.getItem("user")).then(res => { setOrders(res.slice(-5)) });
                         break;
-                    case firstResponse[1]:
-                    case firstResponse[2]:
+                    case firstResponse(sessionStorage.getItem("user"), 1):
+                    case firstResponse(sessionStorage.getItem("user"), 2):
                         getOrdersByUser(sessionStorage.getItem("user")).then(res => { setProducts(JSON.parse(res.slice(-1)[0].products)) });
                         break;
                     default:
@@ -156,7 +156,7 @@ export default function Contact() {
                                                             }
                                                         </React.Fragment>
                                                         :
-                                                        messages[i] === firstResponse[0] || messages[i] === firstResponse[3] ?
+                                                        messages[i] === firstResponse(sessionStorage.getItem("user"), 0) || messages[i] === firstResponse(sessionStorage.getItem("user"), 3) ?
                                                             <React.Fragment key={i}>
                                                                 <div className="message received">
                                                                     {m}
@@ -169,7 +169,7 @@ export default function Contact() {
                                                                     })
                                                                 }
                                                             </React.Fragment>
-                                                            : messages[i] === firstResponse[1] || messages[i] === firstResponse[2] ?
+                                                            : messages[i] === firstResponse(sessionStorage.getItem("user"), 1) || messages[i] === firstResponse(sessionStorage.getItem("user"), 2) ?
                                                                 <React.Fragment key={i}>
                                                                     <div className="message received">
                                                                         {m}
