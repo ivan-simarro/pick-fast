@@ -17,8 +17,8 @@ export default function Profile() {
     const [doingLogin, setDoingLogin] = useState(false);
 
     useEffect(() => {
-        let userStorage = sessionStorage.getItem("user");
-        if (Object.keys(user).length === 0 && logged || (doingLogin && userStorage != null)) {
+        if (logged) {
+            let userStorage = sessionStorage.getItem("user");
             getUserByUser(userStorage).then(us => {
                 setUser(us[0]);
                 setLoadingUser(false);
